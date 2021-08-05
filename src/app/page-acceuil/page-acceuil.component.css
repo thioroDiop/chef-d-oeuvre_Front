@@ -1,0 +1,15 @@
+ul{
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  list-style-position: inside;
+  font-style: italic;
+  font-size: 30px;
+}
+
+#acceuil{
+  display: flex;
+  align-content: center;
+}

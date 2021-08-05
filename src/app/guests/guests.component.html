@@ -1,0 +1,61 @@
+<p><button (click)="AddGuest()">Add a guest</button></p>
+<div id="newguest" [hidden]="changeText " >
+  <form [formGroup]="filterForm" (ngSubmit)="saveGuest()">
+
+
+  <label for="firstName">FirstName : </label>
+  <input id="firstName" type="text" required="true" formControlName="firstName">
+  <label for="lastName">LastName : </label>
+  <input id="lastName" type="text" required="true" formControlName="lastName">
+  <label for="email">Email : </label>
+  <input id="email" type="text"  formControlName="email">
+  <label for="accommodation">Accommodation : </label>
+  <input id="accommodation" type="text" required="true" formControlName="accommodation">
+  <select formControlName="taskid" (change)="onTaskChange()">
+    <!--    on value O pour qu'il affiche la premiere valeur par défault-->
+    <option value="0">--Choose a Task--</option>
+    <option *ngFor="let task of taskList" value="{{task.id}}">{{task.description | uppercase}}</option>
+  </select>
+  <select formeControlName="tableSelect" (change)="onTableChange()" >
+    <option value="0">--Place on a Table--</option>
+    <option *ngFor="let table of tableList" value="{{table.id}}">{{table.tableName | uppercase}}</option>
+  </select>
+  <select formeControlName="coupleSelect" (change)="onCoupleChange()" >
+    <option value="0">--Invited By--</option>
+    <option *ngFor="let bridge of bridalCouple" value="{{bridge.id}}">{{bridge.name | uppercase}}</option>
+  </select>
+  <select formeControlName="relationSelect" (change)="onRelationChange()" >
+    <option value="0">--Relation--</option>
+    <option *ngFor="let relation of relationShipList" value="{{relation.id}}">{{relation.relationType | uppercase}}</option>
+  </select>
+  <select formeControlName="roleSelect" (change)="onRoleChange()" >
+    <option value="0">--Role--</option>
+    <option *ngFor="let role of roleList" value="{{role.id}}">{{role.description | uppercase}}</option>
+  </select>
+  <button   title="Cliquez pour enregistrer"  type="submit"> Save the guest</button>
+  </form>
+</div>
+<br>
+<table>
+  <thead>
+  <tr>
+    <th>Name </th>
+    <th>FistName</th>
+    <th>Email</th>
+    <th>Update ?</th>
+    <th>Delete ?</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let guest of guestList">
+    <td>{{guest.lastName}}</td>
+    <td>{{guest.firstName}}</td>
+    <td>{{guest.email}}</td>
+    <td><button (click)="updateGuest(guest)">Modify</button></td>
+    <td><button (click)="deleteGuest(guest)">Delete</button></td>
+  </tr>
+  </tbody>
+</table>
+
+

@@ -1,0 +1,42 @@
+h1{
+  text-align: center;
+  color: white;
+}
+
+img{
+  min-width: 320px;
+}
+.pageCover{
+  min-width: 50% ;
+}
+ul{
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  list-style-position: inside;
+  font-style: italic;
+  font-size: 30px;
+}
+button {
+  display: inline-block;
+  background-color: #FF9800;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  margin: 30px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color .3s;
+  z-index: 1000;
+}
+#button:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+#button:active {
+  background-color: #555;
+}
