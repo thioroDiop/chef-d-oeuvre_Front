@@ -9,7 +9,7 @@ export interface Guest{
    lastName: string;
    email : string;
    accommodation: string;
-   taskid: number;
+   task: Task;
    table:WeddingTable;
    relationShip:RelationShip;
   role:  Role;

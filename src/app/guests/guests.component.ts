@@ -41,7 +41,7 @@ export class GuestsComponent implements OnInit {
 
   // Je crée mon objet JS qui représente le formulaire d'édition de mon guest
   filterForm = this.formBuilder.group({
-    taskid: 0, //la value  de l'option du formulaire par defaut
+    taskSelect: 0, //la value  de l'option du formulaire par defaut
     firstName: '', accommodation: '', lastName: '', email: '',
     tableSelect: 0,//par defaut la valeur est à 0
     coupleSelect: 0,
@@ -89,9 +89,9 @@ export class GuestsComponent implements OnInit {
 
 //lorsque 'lon choisi un nom  , on le recupére de task grace à  l'id
   onTaskChange() {
-    if (this.filterForm.get('taskid')?.value != 0) {
+    if (this.filterForm.get('taskSelect')?.value != 0) {
       //apell de la fonction qui retoure un task, l'id est recupére avec la valeur du filterForm
-      this.taskService.getTaskById(this.filterForm.get('taskid')?.value).subscribe(result => {
+      this.taskService.getTaskById(this.filterForm.get('taskSelect')?.value).subscribe(result => {
         this.task = result;
       });
 
@@ -136,10 +136,10 @@ export class GuestsComponent implements OnInit {
     }
   }
 
-  /*saveGuest() {
+  saveGuest() {
     this.changeText = true;
     console.log("je ne rentre pas");
-    if (this.newGuest) {
+    if (this.newGuest!=null) {
     console.log("je rentre");
     this.newGuest.firstName = this.filterForm.get('firstName')?.value;
       this.newGuest.lastName = this.filterForm.get('lastName')?.value;
@@ -168,12 +168,12 @@ export class GuestsComponent implements OnInit {
       })
       console.log("fonction de sauvegarde");
     }
-  }*/
 
+/*
   saveGuest() {
     this.newGuest = this.filterForm.value;
     this.guestService.createGuest(this.newGuest).subscribe();
     console.log("bonjour");
-
+*/
   }
 }

@@ -11,7 +11,7 @@
   <input id="email" type="text"  formControlName="email">
   <label for="accommodation">Accommodation : </label>
   <input id="accommodation" type="text" required="true" formControlName="accommodation">
-  <select formControlName="taskid" (change)="onTaskChange()">
+  <select formControlName="taskSelect" (change)="onTaskChange()">
     <!--    on value O pour qu'il affiche la premiere valeur par défault-->
     <option value="0">--Choose a Task--</option>
     <option *ngFor="let task of taskList" value="{{task.id}}">{{task.description | uppercase}}</option>
