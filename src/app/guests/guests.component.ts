@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GuestService} from "../guest.service";
 import {Guest} from "../guest";
 import {TaskService} from "../task.service";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TableService} from "../table.service";
 import {WeddingTable} from "../WeddingTable";
 import {BridalService} from "../bridal.service";
 import {BridalCouple} from "../bridalCouple";
 import {RelationShip} from "../relationShip";
 import {Role} from "../role";
+import {Task} from "../task";
 import {RelationService} from "../relation.service";
 import {RoleService} from "../role.service";
+import {Output, EventEmitter} from '@angular/core';
+import {Gift} from "../gift";
+import {GiftService} from "../gift.service";
 
 @Component({
   selector: 'app-guests',
@@ -26,34 +30,50 @@ export class GuestsComponent implements OnInit {
   relationShip: RelationShip | undefined;
   role: Role | undefined;
   guestList: any;
-  taskList: any;
+  b: any;
+  taskList:Task[] = [];
+  giftList: Gift[]=[];
   tableList: any;
   bridalCouple: any;
   relationShipList: any;
-  roleList: any;
+  roleList:  any;
 // Je déclare mon attribut newGuest qui me permettra de voir le guest édité dans la vue
-  newGuest: Guest | undefined;
+  newGuest: Guest | undefined  ;
+//decalaration d'un Output qui gére les événements (Emission d'évenements vers le parent)
+
+
+
 
   constructor(private guestService: GuestService, private taskService: TaskService, private formBuilder: FormBuilder,
               private tableService: TableService, private  bridalService: BridalService,
-              private relationService: RelationService, private roleService: RoleService) {
+              private relationService: RelationService, private roleService: RoleService,
+              private giftService: GiftService) {
   }
 
+
+  filterGuestForm=this.formBuilder.group({
+    relationShip:0,
+    role:0,
+    task: 0, //la value  de l'option du formulaire par defaut
+    firstName: '',
+    accommodation: '',
+    lastName: '',
+    email: '',
+    table: 0,//par defaut la valeur est à 0
+    bridal: 0,
+    gift:0,
+
+  });
+
   // Je crée mon objet JS qui représente le formulaire d'édition de mon guest
-  filterForm = this.formBuilder.group({
-    taskSelect: 0, //la value  de l'option du formulaire par defaut
-    firstName: '', accommodation: '', lastName: '', email: '',
-    tableSelect: 0,//par defaut la valeur est à 0
-    coupleSelect: 0,
-    relationSelect: 0,
-    roleSelect: 0
-  })
+
 
 
   ngOnInit(): void {
 
     this.guestService.getAllGuest().subscribe(result => {
       this.guestList = result;
+console.log(this.guestList);
 
     })
   }
@@ -75,11 +95,14 @@ export class GuestsComponent implements OnInit {
     })
     this.roleService.getAllRole().subscribe(result => {
       this.roleList = result;
-
+      console.log( this.roleList);
     })
     this.relationService.getAllRelation().subscribe(result => {
       this.relationShipList = result;
     })
+    this.giftService.getAllGift().subscribe(result =>{
+      this.giftList=result;
+   })
   }
 
 
@@ -89,10 +112,11 @@ export class GuestsComponent implements OnInit {
 
 //lorsque 'lon choisi un nom  , on le recupére de task grace à  l'id
   onTaskChange() {
-    if (this.filterForm.get('taskSelect')?.value != 0) {
+    if (this.filterGuestForm.get('task')?.value != 0) {
       //apell de la fonction qui retoure un task, l'id est recupére avec la valeur du filterForm
-      this.taskService.getTaskById(this.filterForm.get('taskSelect')?.value).subscribe(result => {
-        this.task = result;
+      this.taskService.getAllTask().subscribe(result => {
+        this.task = this.filterGuestForm.get('task')?.value;
+        console.log(this.task);
       });
 
 
@@ -101,79 +125,91 @@ export class GuestsComponent implements OnInit {
 
   //on recupére la table choisie
   onTableChange() {
-    if (this.filterForm.get('tableSelect')?.value != 0) {
-      this.tableService.getTableById(this.filterForm.get('tableSelect')?.value).subscribe(result => {
-        this.table = result;
+    if (this.filterGuestForm.get('table')?.value != 0) {
+      this.tableService.getAllTable().subscribe(result => {
+        this.table = this.filterGuestForm.get('table')?.value;
+        console.log(this.table);
       })
     }
   }
 
   //on recupére le marié qui a invité
   onCoupleChange() {
-    if (this.filterForm.get('coupleSelect')?.value != 0) {
-      this.bridalService.getCoupleById(this.filterForm.get('coupleSelect')?.value).subscribe(result => {
-        this.bridal = result;
+    if (this.filterGuestForm.get('bridal')?.value != 0) {
+      this.bridalService.getBridalCouple().subscribe(result => {
+        this.bridal = this.filterGuestForm.get('bridal')?.value;
+        console.log(this.bridal);
       })
     }
   }
 
 //on recupére le type de relation avec les mariées
   onRelationChange() {
-    if (this.filterForm.get('relationSelect')?.value != 0) {
-      this.relationService.getRelationById(this.filterForm.get('relationSelect')?.value).subscribe(result => {
-        this.relationShip = result;
-      })
-    }
+      this.relationService.getAllRelation().subscribe(() => {
+        console.log('Detail de mon objet relation selectionnée');
+//je recupere le detail le relation selectionné
+        this.relationShip = this.filterGuestForm.get('relationShip')?.value;
+        console.log( this.relationShip);
+      });
   }
+
 
   //on recupére le type de role
+
   onRoleChange() {
-    if (this.filterForm.get('roleSelect')?.value != 0) {
-      this.roleService.getRoleById(this.filterForm.get('roleSelect')?.value).subscribe(result => {
-        this.role = result;
-        console.log('roleid :' + this.filterForm.get('roleSelect')?.value);
-      })
-    }
+    this.roleService.getAllRole().subscribe(() => {
+      console.log('Detail de mon objet Role selectionné');
+//je recupere le detail le role selectionné
+      this.role = this.filterGuestForm.get('role')?.value;
+      console.log( this.role);
+    });
+
   }
 
-  saveGuest() {
+  onGiftChange() {
+    this.giftService.getAllGift().subscribe(() => {
+      console.log('Detail de mon objet gift selectionné');
+//je recupere le detail le gift selectionné
+      console.log( this.filterGuestForm.get('gift')?.value);
+    });
+  }
+
+  submit() {
+
+  }
+  /*saveGuest() {
+    console.log("Form Submitted")
+    console.log( this.filterGuestForm.get('roleSelectForm')?.value);
+
     this.changeText = true;
-    console.log("je ne rentre pas");
-    if (this.newGuest!=null) {
-    console.log("je rentre");
-    this.newGuest.firstName = this.filterForm.get('firstName')?.value;
-      this.newGuest.lastName = this.filterForm.get('lastName')?.value;
-      this.newGuest.email = this.filterForm.get('email')?.value;
-      this.newGuest.accommodation = this.filterForm.get('hebergement')?.value;
+    console.log("je ne suis pas encore rentré");
 
-        if (this.role) {
-          this.newGuest.role = this.role;
-        };
-      if (this.bridal) {
-        this.newGuest.bridal = this.bridal;
-      };
-      if (this.table) {
-        this.newGuest.table = this.table;
-      };
-      if (this.task) {
-        this.newGuest.task = this.task;
-      };
-      if (this.relationShip) {
-        this.newGuest.relationShip = this.relationShip;
-      };
+    // @ts-ignore
+    this.newGuest = {
 
-      this.guestService.createGuest(this.newGuest).subscribe(saveGuest=>{
-        console.log("le timeline a bien été mis à jour");
 
-      })
-      console.log("fonction de sauvegarde");
-    }
+      firstName: this.filterGuestForm.get('firstName')?.value,
+      lastName: this.filterGuestForm.get('lastName')?.value,
+      email: this.filterGuestForm.get('email')?.value,
+      accommodation: this.filterGuestForm.get('accommodation')?.value,
+      role: this.filterGuestForm.get('roleSelectForm')?.value,
+     bridal:  this.filterGuestForm.get('relationSelect')?.value,
+      //this.newGuest.task: this.task,
+      task: this.filterGuestForm.get('taskSelect')?.value,
+      relationShip: this.filterGuestForm.get('relationSelect')?.value,
+      table: this.filterGuestForm.get('tableSelect')?.value
+    };
+   */
 
-/*
+
+
   saveGuest() {
-    this.newGuest = this.filterForm.value;
+    this.newGuest = this.filterGuestForm.value;
     this.guestService.createGuest(this.newGuest).subscribe();
-    console.log("bonjour");
-*/
+    console.log("le timeline a bien été mis à jour");
+    console.log(this.newGuest);
+    this.changeText = true;
   }
+
+
 }

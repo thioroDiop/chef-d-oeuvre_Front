@@ -1,9 +1,11 @@
 import {WeddingTable} from "./WeddingTable";
 import {Role} from "./role";
+import {Task} from "./task";
 import {RelationShip} from "./relationShip";
 import {BridalCouple} from "./bridalCouple";
+import {Gift} from "./gift";
 
-export interface Guest{
+ export interface Guest{
   id:number;
  firstName: string;
    lastName: string;
@@ -13,5 +15,6 @@ export interface Guest{
    table:WeddingTable;
    relationShip:RelationShip;
   role:  Role;
-   bridal: BridalCouple
+   bridal: BridalCouple;
+   gift:Gift;
 }
