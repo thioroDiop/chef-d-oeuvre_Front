@@ -3,6 +3,7 @@
 
   <form [formGroup]="filterGuestForm" (ngSubmit)="saveGuest()">
 
+    <input type="hidden" id="guest_id" class="form-control" formControlName="id">
     <label for="firstName">FirstName : </label>
     <input id="firstName" type="text" required="true" formControlName="firstName">
     <label for="lastName">LastName : </label>
@@ -13,28 +14,28 @@
     <input id="accommodation" type="text" required="true" formControlName="accommodation">
     <select formControlName="task" (change)="onTaskChange()">
       <!--    on value O pour qu'il affiche la premiere valeur par défault-->
-      <option value="0">--Choose a Task--</option>
+      <option value="null">--Choose a Task--</option>
       <option *ngFor="let task of taskList" [ngValue]="task">{{task.description | uppercase}}</option>
     </select>
     <select formControlName="table" (change)="onTableChange()" >
-      <option value="0">--Place on a Table--</option>
+      <option value="null">--Place on a Table--</option>
       <option *ngFor="let table of tableList" [ngValue]="table">{{table.tableName | uppercase}}</option>
     </select>
     <select formControlName="bridal" (change)="onCoupleChange()" >
-      <option value="0">--Invited By--</option>
+      <option value="null">--Invited By--</option>
       <option *ngFor="let bridge of bridalCouple" [ngValue]="bridge">{{bridge.name | uppercase}}</option>
     </select>
     <select formControlName="role" (change)="onRoleChange()">
       <!--    on value O pour qu'il affiche la premiere valeur par défault-->
-      <option value="0">-- Choisir un Role--</option>
+      <option value="null">-- Choisir un Role--</option>
       <option *ngFor="let role of roleList" [ngValue]="role">{{role.description | uppercase}}</option>
     </select>
     <select formControlName="relationShip" (change)="onRelationChange()" >
-      <option value="0">--Relation--</option>
+      <option value="null">--Relation--</option>
       <option *ngFor="let relation of relationShipList" [ngValue]="relation">{{relation.relationType | uppercase}}</option>
     </select>
-    <select formControlName="gift" (change)="onGiftChange()" >
-      <option value="0">--Do you have a gift?--</option>
+    <select formControlName="gift" required="false"(change)="onGiftChange()" >
+      <option value="null">--Do you have a gift?--</option>
       <option *ngFor="let gift of giftList" [ngValue]="gift">{{gift.name | uppercase}}</option>
     </select>
 
@@ -54,12 +55,12 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let guest of guestList">
+  <tr *ngFor="let guest of guestList  ">
     <td>{{guest.lastName}}</td>
     <td>{{guest.firstName}}</td>
     <td>{{guest.email}}</td>
     <td><button (click)="updateGuest(guest)">Modify</button></td>
-    <td><button (click)="deleteGuest(guest)">Delete</button></td>
+    <td><button (click)="deleteGuest(guest.id)">Delete</button></td>
   </tr>
   </tbody>
 </table>
