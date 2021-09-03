@@ -1,3 +1,4 @@
+<div class="container-fluid">
 <button type="button" class="btn btn-warning mb-2 btn-space"
         title="Cliquez pour retourner Page d'acceuil "
         routerLink="">Retour</button>
@@ -12,8 +13,12 @@
 
     <h1>Wedding Planning Proposal</h1>
 
-   <ul class="header-nav">
+
+     <ul class="nav nav-pills">
+
+     <li><a class="nav-link active" routerLink="">Accueil</a></li>
      <li class="header-nav_item"><a routerLink="/adminguest">Gerer les invités</a></li>
+
      <br>
      <li class="header-nav_item"> <a routerLink="/gift">Les cadeaux</a></li>
    </ul>
@@ -27,7 +32,7 @@
 
 
 
-<section id="weather-content">
+<section id="weather-content" class="container fluid col-md-12">
   <router-outlet></router-outlet>
 </section>
 
@@ -36,3 +41,4 @@
 
 
 </body>
+</div>

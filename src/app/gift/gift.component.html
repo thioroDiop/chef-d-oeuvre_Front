@@ -1,1 +1,84 @@
-<p>gift works!</p>
+<h1>List of gifts</h1>
+<hr/>
+
+
+<!--    <h2><a [routerLink]="['princess',princess.id]">{{princess.name}}</a></h2>-->
+<div class="container col-lg-12" >
+  <div class="row" >
+    <div class="col-2 toto"  >
+      <div *ngFor="let gift of giftList" class="container row no-gutters mt-3 tata" >
+        <div class="container">
+          <img src={{gift.imageUrl}} class="img-thumbnail hoverable card-img-top" style="width:400px; height:400px"
+               (click)="onclick(gift.id)">
+          <h2 class="card-title">{{gift.name}}</h2>
+          <h3 class="card-subtitle">Prix :{{gift.price}}€ </h3>
+          <!--      cette balise va apparaitre seulement si on on une description-->
+          <p class="card-text" *ngIf="gift.description" style="word-wrap: break-word;">{{gift.description}}</p>
+        </div>
+        <div class="popov">
+          <!--          <h3>Please click on the below button open popup</h3>-->
+          <!--          <br/>-->
+          <button
+            style="margin: 50px; padding: 10px"
+            type="button"
+            class="btn btn-primary"
+            (click)="openPopup(gift.id)">Show people to thank
+          </button>
+        </div>
+        <div
+          class="modal"
+          tabindex="-1"
+          role="dialog"
+          [ngStyle]="{'display':displayStyle}">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title lead">Personnes à Remercier pour le cadeau</h4>
+              </div>
+              <div class="modal-body">
+                <!--        <div class="centred ">-->
+                <!--          <ng-container *ngIf="guestListByGuest ">-->
+                <!--            <div class="bg-light border border-info" *ngIf="detailGift">-->
+
+                <table class="table table-striped withEspace">
+                  <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>FistName</th>
+                    <th>Email</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let guest of guestListByGuest  ">
+                    <td>{{guest.lastName}}</td>
+                    <td>{{guest.firstName}}</td>
+                    <td>{{guest.email}}</td>
+
+                  </tr>
+                  </tbody>
+                </table>
+                <!--              <button class="btn btn-primary mb-2 btnCclose" (click)="closeDetail()"> Fermer</button>-->
+
+                <!--            </div>-->
+                <!--          </ng-container>-->
+                <!--        </div>-->
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger"
+                        (click)="closePopup()">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+

@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+h1 {
+  color: rgb(88, 19, 116);
+  padding-left: 10%;
+  font-size: 2em;
+}
+
+.navbar-default {
+  background-color: rgb(88, 19, 116);
+  height: auto;
+  color: white;
+  font-weight: bold;
+}
+
+.navbar-default .nav > li > a {
+  color: white;
+}
+
+
+.centred{
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+  margin-top: 7px;
+}
+
+.btnAdd{
+  margin-left: 1%;
+}
+
+.withEspace{
+  margin-top: 2%;
+}

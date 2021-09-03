@@ -16,5 +16,5 @@ import {Gift} from "./gift";
    relationShip:RelationShip;
   role:  Role;
    bridal: BridalCouple;
-   gift:Gift
+   gift:Gift;
 }

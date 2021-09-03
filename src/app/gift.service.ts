@@ -16,4 +16,7 @@ export class GiftService {
     return this.http.get<Gift[]>(this.baseUrl + 'gifts');
   }
 
+  getGuestByGift(id: number):Observable<Guest[]>{
+    return this.http.get<Guest[]>(this.baseUrl+'guests/gifts/'+id);
+  }
 }

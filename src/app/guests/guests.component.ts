@@ -51,6 +51,7 @@ export class GuestsComponent implements OnInit {
   }
 
 
+
   filterGuestForm = this.formBuilder.group({
     relationShip: null,
     role: null,
@@ -205,20 +206,23 @@ export class GuestsComponent implements OnInit {
    */
   updateGuest(guest: Guest) {
     this.changeText = false;
+    console.log(guest);
     this.filterGuestForm.patchValue({
       id: guest.id,
       firstName: guest.firstName,
       lastName: guest.lastName,
       email: guest.email,
       accommodation: guest.accommodation,
+     // task:this.taskService.getTaskById( guest.task.id).subscribe(),
       task: guest.task,
-      table: guest.table,
+    table: guest.table,
       relationShip: guest.relationShip,
       role: guest.role,
       bridal: guest.bridal,
-      gift: guest.gift
+      gift: guest.gift,
     });
     this.guestUpdated = guest;
+    console.log(this.guestUpdated);
   }
 
 
@@ -233,6 +237,7 @@ export class GuestsComponent implements OnInit {
       // Remplissage de l'attribut guestUpdated
       // this.guestUpdated = guest;
       this.guestService.updateGuest(this.guestUpdated).subscribe(()=>{
+        //je met a jour la liste de guest
         this.guestService.getAllGuest().subscribe(result => {
           this.guestList = result;
         });
@@ -248,7 +253,7 @@ export class GuestsComponent implements OnInit {
       this.guestUpdated = undefined;
       //je vide le formulaire
       this.filterGuestForm.reset();
-      //je met a jour la liste de guest
+
 
     }
     // Sinon, alors je peux créer un nouveau guest
@@ -264,6 +269,9 @@ export class GuestsComponent implements OnInit {
           this.guestList = result;
         });
       });
+console.log(this.newGuest);
+      //je vide le formulaire
+      this.filterGuestForm.reset();
       //je referme le formulaire
       this.changeText = true;
     }

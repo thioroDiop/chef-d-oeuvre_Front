@@ -30,9 +30,9 @@
       <option value="null">-- Choisir un Role--</option>
       <option *ngFor="let role of roleList" [ngValue]="role">{{role.description | uppercase}}</option>
     </select>
-    <select formControlName="relationShip" (change)="onRelationChange()" >
+    <select formControlName="relationShip" required="false" (change)="onRelationChange()" >
       <option value="null">--Relation--</option>
-      <option *ngFor="let relation of relationShipList" [ngValue]="relation">{{relation.relationType | uppercase}}</option>
+      <option *ngFor="let relationShip of relationShipList" [ngValue]="relationShip">{{relationShip.relationType | uppercase}}</option>
     </select>
     <select formControlName="gift" required="false"(change)="onGiftChange()" >
       <option value="null">--Do you have a gift?--</option>
@@ -43,7 +43,7 @@
   </form>
 </div>
 <br>
-<table>
+<table class="table table-striped withEspace">
   <thead>
   <tr>
     <th>Name </th>
@@ -59,8 +59,8 @@
     <td>{{guest.lastName}}</td>
     <td>{{guest.firstName}}</td>
     <td>{{guest.email}}</td>
-    <td><button (click)="updateGuest(guest)">Modify</button></td>
-    <td><button (click)="deleteGuest(guest.id)">Delete</button></td>
+    <td><button class="btn btn-warning mb-2" (click)="updateGuest(guest)">Modify</button></td>
+    <td><button class="btn btn-danger mb-2"(click)="deleteGuest(guest.id)">Delete</button></td>
   </tr>
   </tbody>
 </table>

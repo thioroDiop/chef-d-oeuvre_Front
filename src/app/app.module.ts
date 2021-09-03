@@ -8,13 +8,15 @@ import { GuestsComponent } from './guests/guests.component';
 import { GiftComponent } from './gift/gift.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import { NgbdModalConfigComponent } from './ngbd-modal-config/ngbd-modal-config.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageAcceuilComponent,
     GuestsComponent,
-    GiftComponent
+    GiftComponent,
+    NgbdModalConfigComponent
   ],
   imports: [
     BrowserModule,
@@ -23,10 +25,11 @@ HttpClientModule,
     RouterModule.forRoot([
       {path: '', component: PageAcceuilComponent},
       {path:'adminguest', component:GuestsComponent},
-      {path:'gift', component:GiftComponent}
+      {path:'gift', component:GiftComponent},
+      {path:'gift/modal', component:NgbdModalConfigComponent}
     ])
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
