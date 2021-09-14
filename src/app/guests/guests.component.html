@@ -55,12 +55,12 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let guest of guestList  ">
+  <tr *ngFor="let guest of guestList ">
     <td>{{guest.lastName}}</td>
     <td>{{guest.firstName}}</td>
     <td>{{guest.email}}</td>
-    <td><button class="btn btn-warning mb-2" (click)="updateGuest(guest)">Modify</button></td>
-    <td><button class="btn btn-danger mb-2"(click)="deleteGuest(guest.id)">Delete</button></td>
+    <td><button class="btn btn-warning mb-2" (click)="updateGuest(guest)">Modify 🖊 </button></td>
+    <td><button class="btn btn-danger mb-2"(click)="deleteGuest(guest.id) " >Delete 🗑</button></td>
   </tr>
   </tbody>
 </table>

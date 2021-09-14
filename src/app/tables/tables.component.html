@@ -1,0 +1,24 @@
+<h1> PLAN DES TABLES ✈✈✈</h1>
+<hr/>
+
+
+<div  *ngFor="let table of tableList" class="container">
+
+  <div class="row content-center">
+    <div class="col-md-8 ">
+      <img style='float:left;width:200px;height:200px; margin-right:10px;' src="{{table.imageUrl}}" />
+
+      <img src="{{table.tableName}}" style="font-size:30%" alt="police-chinatown-champs" border="0">
+
+<!--      <h1>{{table.tableName}}</h1>-->
+      <h4 *ngFor="let guest of table.guestList" class="font-italic" >{{guest.firstName}} {{guest.lastName}}</h4>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

@@ -262,6 +262,10 @@ export class GuestsComponent implements OnInit {
       // Création d'un nouvel objet
       console.log("je suis dans la fonction create");
       this.newGuest = this.filterGuestForm.value;
+
+      // @ts-ignore
+      this.newGuest?.table=this.filterGuestForm.get('table')?.value;
+      console.log( this.newGuest);
       this.guestService.createGuest(this.newGuest).subscribe(() => {
         console.log("l'invité a bien été crée");
         //je met a jour la liste de guest

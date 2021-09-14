@@ -5,9 +5,9 @@
 <!--    <h2><a [routerLink]="['princess',princess.id]">{{princess.name}}</a></h2>-->
 <div class="container col-lg-12" >
   <div class="row" >
-    <div class="col-2 toto"  >
-      <div *ngFor="let gift of giftList" class="container row no-gutters mt-3 tata" >
-        <div class="container">
+    <div  class="  mt-2 p-2 col-2 toto no-gutters" >
+      <div *ngFor="let gift of giftList" class=" row no-gutters mt-3 " >
+        <div class="col">
           <img src={{gift.imageUrl}} class="img-thumbnail hoverable card-img-top" style="width:400px; height:400px"
                (click)="onclick(gift.id)">
           <h2 class="card-title">{{gift.name}}</h2>
@@ -16,8 +16,7 @@
           <p class="card-text" *ngIf="gift.description" style="word-wrap: break-word;">{{gift.description}}</p>
         </div>
         <div class="popov">
-          <!--          <h3>Please click on the below button open popup</h3>-->
-          <!--          <br/>-->
+
           <button
             style="margin: 50px; padding: 10px"
             type="button"
@@ -36,9 +35,7 @@
                 <h4 class="modal-title lead">Personnes à Remercier pour le cadeau</h4>
               </div>
               <div class="modal-body">
-                <!--        <div class="centred ">-->
-                <!--          <ng-container *ngIf="guestListByGuest ">-->
-                <!--            <div class="bg-light border border-info" *ngIf="detailGift">-->
+
 
                 <table class="table table-striped withEspace">
                   <thead>
@@ -57,11 +54,7 @@
                   </tr>
                   </tbody>
                 </table>
-                <!--              <button class="btn btn-primary mb-2 btnCclose" (click)="closeDetail()"> Fermer</button>-->
 
-                <!--            </div>-->
-                <!--          </ng-container>-->
-                <!--        </div>-->
 
               </div>
               <div class="modal-footer">
