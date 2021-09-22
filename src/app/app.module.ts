@@ -8,9 +8,11 @@ import { PageAcceuilComponent } from './page-acceuil/page-acceuil.component';
 import { GuestsComponent } from './guests/guests.component';
 import { GiftComponent } from './gift/gift.component';
 import {HttpClientModule} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
-import { NgbdModalConfigComponent } from './ngbd-modal-config/ngbd-modal-config.component';
+import {FormsModule,ReactiveFormsModule} from "@angular/forms";
+
 import { TablesComponent } from './tables/tables.component';
+import { OderByPipePipe } from './oder-by-pipe.pipe';
+import { GuestVueGuestsComponent } from './guest-vue-guests/guest-vue-guests.component';
 
 @NgModule({
   declarations: [
@@ -18,23 +20,28 @@ import { TablesComponent } from './tables/tables.component';
     PageAcceuilComponent,
     GuestsComponent,
     GiftComponent,
-    NgbdModalConfigComponent,
-    TablesComponent
+
+    TablesComponent,
+    OderByPipePipe,
+    GuestVueGuestsComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
 HttpClientModule,
+    FormsModule,
 
     RouterModule.forRoot([
       {path: '', component: PageAcceuilComponent},
       {path:'adminguest', component:GuestsComponent},
       {path:'gift', component:GiftComponent},
-      {path:'gift/modal', component:NgbdModalConfigComponent},
+      {path:'adminguest/guest', component:GuestVueGuestsComponent},
       {path:'tables',component:TablesComponent}
     ])
   ],
   providers: [],
   bootstrap: [AppComponent],
+
+
 })
 export class AppModule { }

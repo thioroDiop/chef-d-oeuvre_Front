@@ -2,14 +2,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-columns: 50px;
-
   grid-gap: 3px;
-
-}
-.tata{
-
-
-  max-width:45%
 }
 
 
@@ -17,7 +10,6 @@
   display: inline-block;
   position: static;
   right: 100px;
-
 }
 
 img{
@@ -27,5 +19,15 @@ img{
 }
 .row{
   width: 500px;
+}
 
+form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-style: dashed;
+  margin: 1rem auto ;
+  width: 350px;
+  padding: 1rem ;
+  background-color: aqua;
 }

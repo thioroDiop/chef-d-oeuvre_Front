@@ -79,7 +79,8 @@ export class GuestsComponent implements OnInit {
     this.taskService.getAllTask().subscribe(result => {
       this.taskList = result;
     })
-    this.tableService.getAllTable().subscribe(result => {
+    //affiche seulement les tables qui ont moins de 4 invités
+    this.tableService.getTableNotFull().subscribe(result => {
       this.tableList = result;
     })
     this.bridalService.getBridalCouple().subscribe(result => {
@@ -129,7 +130,7 @@ export class GuestsComponent implements OnInit {
   //on recupére la table choisie
   onTableChange() {
     if (this.filterGuestForm.get('table')?.value != 0) {
-      this.tableService.getAllTable().subscribe(result => {
+      this.tableService.getTableNotFull().subscribe(result => {
         this.table = this.filterGuestForm.get('table')?.value;
         console.log(this.table);
       })
@@ -177,33 +178,8 @@ export class GuestsComponent implements OnInit {
     });
   }
 
-  submit() {
-
-  }
-
-  /*saveGuest() {
-    console.log("Form Submitted")
-    console.log( this.filterGuestForm.get('roleSelectForm')?.value);
-
-    this.changeText = true;
-    console.log("je ne suis pas encore rentré");
-
-    // @ts-ignore
-    this.newGuest = {
 
 
-      firstName: this.filterGuestForm.get('firstName')?.value,
-      lastName: this.filterGuestForm.get('lastName')?.value,
-      email: this.filterGuestForm.get('email')?.value,
-      accommodation: this.filterGuestForm.get('accommodation')?.value,
-      role: this.filterGuestForm.get('roleSelectForm')?.value==0?,
-     bridal:  this.filterGuestForm.get('relationSelect')?.value==0? null : this.filterGuestForm.get('relationSelect')?.value,
-      //this.newGuest.task: this.task,
-      task: this.filterGuestForm.get('taskSelect')?.value,
-      relationShip: this.filterGuestForm.get('relationSelect')?.value,
-      table: this.filterGuestForm.get('tableSelect')?.value
-    };
-   */
   updateGuest(guest: Guest) {
     this.changeText = false;
     console.log(guest);
@@ -231,7 +207,6 @@ export class GuestsComponent implements OnInit {
     // Gestion de l'événement clic sur "Modifier" ==> je remplis les champs du formulaire
     // Si ma propriété GuestUpdated est défini, alors je peux le mettre à jour
     if (this.guestUpdated) {
-
       this.guestUpdated = this.filterGuestForm.value;
       console.log(this.guestUpdated);
       // Remplissage de l'attribut guestUpdated
@@ -241,28 +216,21 @@ export class GuestsComponent implements OnInit {
         this.guestService.getAllGuest().subscribe(result => {
           this.guestList = result;
         });
+
       });
-
-
-      console.log(this.guestUpdated?.id);
-      console.log(this.guestUpdated?.firstName);
-
       console.log("Le guest a bien été mis à jour");
 
       // je vide mon objet guestUpdated
       this.guestUpdated = undefined;
       //je vide le formulaire
       this.filterGuestForm.reset();
-
-
     }
+
     // Sinon, alors je peux créer un nouveau guest
     else {
-
       // Création d'un nouvel objet
       console.log("je suis dans la fonction create");
       this.newGuest = this.filterGuestForm.value;
-
       // @ts-ignore
       this.newGuest?.table=this.filterGuestForm.get('table')?.value;
       console.log( this.newGuest);
@@ -272,6 +240,10 @@ export class GuestsComponent implements OnInit {
         this.guestService.getAllGuest().subscribe(result => {
           this.guestList = result;
         });
+        //Je met a jour la liste de tables qui peut changer
+        this.tableService.getTableNotFull().subscribe(result => {
+          this.tableList = result;
+        })
       });
 console.log(this.newGuest);
       //je vide le formulaire

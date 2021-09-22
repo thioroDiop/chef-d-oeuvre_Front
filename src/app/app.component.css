@@ -10,7 +10,7 @@ img{
   min-width: 50% ;
 }
 ul{
-  display: flex;
+  /*display: flex;*/
   flex-direction: row;
   padding: 0;
   margin: 0;

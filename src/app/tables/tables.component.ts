@@ -19,22 +19,12 @@ export class TablesComponent implements OnInit {
   ngOnInit(): void {
     this.tableService.getAllTable().subscribe(result => {
       this.tableList = result;
-
     });
 
   };
 
 
-  /*((table: { id: number; })=>{
 
-}*/
-
-
-  onchange(idtable: number) {
-    this.tableService.getGuestByTable(idtable).subscribe(result => {
-      this.guestlist = result;
-    })
-  }
 
   select(tableId: number) {
     this.tableService.getGuestByTable(tableId).subscribe(result => {

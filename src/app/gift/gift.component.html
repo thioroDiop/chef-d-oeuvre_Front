@@ -1,22 +1,45 @@
-<h1>List of gifts</h1>
+<h1>Liste des Cadeaux</h1>
 <hr/>
+
+<!--formulaire des pages-->
+<form style="flex-direction: row-reverse; justify-content: center;">
+  <div class="form-field">
+    <label for="size">Taille de page</label>
+    <select name="size" id="size" [(ngModel)]="page.size" (change)="onPageDetailsChange()">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+  </div>
+
+  <div class="form-field">
+    <label for="page">Page</label>
+    <select name="page" id="page" [(ngModel)]="page.number" (change)="onPageDetailsChange()">
+      <option *ngFor="let pageNumber of pages" [value]="pageNumber">Page {{pageNumber + 1}}</option>
+    </select>
+  </div>
+
+</form>
 
 
 <!--    <h2><a [routerLink]="['princess',princess.id]">{{princess.name}}</a></h2>-->
-<div class="container col-lg-12" >
-  <div class="row" >
-    <div  class="  mt-2 p-2 col-2 toto no-gutters" >
-      <div *ngFor="let gift of giftList" class=" row no-gutters mt-3 " >
+<div class="container col-lg-12">
+  <div class="row">
+    <div class="  mt-2 p-2 col-2 toto no-gutters">
+      <div *ngFor="let gift of giftList | async" class=" row no-gutters mt-3 ">
         <div class="col">
           <img src={{gift.imageUrl}} class="img-thumbnail hoverable card-img-top" style="width:400px; height:400px"
-               (click)="onclick(gift.id)">
+          >
           <h2 class="card-title">{{gift.name}}</h2>
           <h3 class="card-subtitle">Prix :{{gift.price}}€ </h3>
           <!--      cette balise va apparaitre seulement si on on une description-->
           <p class="card-text" *ngIf="gift.description" style="word-wrap: break-word;">{{gift.description}}</p>
         </div>
-        <div class="popov">
 
+        <!--       Code pour popover-->
+        <div class="popov">
           <button
             style="margin: 50px; padding: 10px"
             type="button"
@@ -24,20 +47,15 @@
             (click)="openPopup(gift.id)">Show people to thank
           </button>
         </div>
-        <div
-          class="modal"
-          tabindex="-1"
-          role="dialog"
-          [ngStyle]="{'display':displayStyle}">
+        <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title lead">Personnes à Remercier pour le cadeau</h4>
               </div>
-              <div class="modal-body">
-
-
-                <table class="table table-striped withEspace">
+              <div class="modal-body" >
+<div *ngIf="guestListByGift?.length==0">Personne n'a parcicipé</div>
+                <table  class="table table-striped withEspace" *ngIf="guestListByGift?.length!=0" >
                   <thead>
                   <tr>
                     <th>Name</th>
@@ -46,7 +64,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr *ngFor="let guest of guestListByGuest  ">
+                  <tr *ngFor="let guest of guestListByGift  ">
                     <td>{{guest.lastName}}</td>
                     <td>{{guest.firstName}}</td>
                     <td>{{guest.email}}</td>
@@ -54,7 +72,6 @@
                   </tr>
                   </tbody>
                 </table>
-
 
               </div>
               <div class="modal-footer">

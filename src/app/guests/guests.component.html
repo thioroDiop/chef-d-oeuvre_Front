@@ -1,4 +1,4 @@
-<p><button (click)="AddGuest()">Add a guest</button></p>
+<p><button (click)="AddGuest()">Ajouter un invité</button></p>
 <div id="newguest" [hidden]="changeText " >
 
   <form [formGroup]="filterGuestForm" (ngSubmit)="saveGuest()">
@@ -14,15 +14,15 @@
     <input id="accommodation" type="text" required="true" formControlName="accommodation">
     <select formControlName="task" (change)="onTaskChange()">
       <!--    on value O pour qu'il affiche la premiere valeur par défault-->
-      <option value="null">--Choose a Task--</option>
+      <option value="null">--Choisir une Tache--</option>
       <option *ngFor="let task of taskList" [ngValue]="task">{{task.description | uppercase}}</option>
     </select>
     <select formControlName="table" (change)="onTableChange()" >
-      <option value="null">--Place on a Table--</option>
-      <option *ngFor="let table of tableList" [ngValue]="table">{{table.tableName | uppercase}}</option>
+      <option value="null">--Choisir la Table--</option>
+      <option *ngFor="let table of tableList | oderByPipe:'id' " [ngValue]="table"> {{table.id}} </option>
     </select>
     <select formControlName="bridal" (change)="onCoupleChange()" >
-      <option value="null">--Invited By--</option>
+      <option value="null">--Invité par--</option>
       <option *ngFor="let bridge of bridalCouple" [ngValue]="bridge">{{bridge.name | uppercase}}</option>
     </select>
     <select formControlName="role" (change)="onRoleChange()">
@@ -35,22 +35,22 @@
       <option *ngFor="let relationShip of relationShipList" [ngValue]="relationShip">{{relationShip.relationType | uppercase}}</option>
     </select>
     <select formControlName="gift" required="false"(change)="onGiftChange()" >
-      <option value="null">--Do you have a gift?--</option>
+      <option value="null">--Avez vous un Cadeau?--</option>
       <option *ngFor="let gift of giftList" [ngValue]="gift">{{gift.name | uppercase}}</option>
     </select>
 
-    <button   title="Cliquez pour enregistrer"  type="submit"> Save the guest</button>
+    <button   title="Cliquez pour enregistrer"  type="submit"> Sauvegarder l'invité</button>
   </form>
 </div>
 <br>
 <table class="table table-striped withEspace">
   <thead>
   <tr>
-    <th>Name </th>
-    <th>FistName</th>
+    <th>Nom </th>
+    <th>Prenom</th>
     <th>Email</th>
-    <th>Update ?</th>
-    <th>Delete ?</th>
+    <th>Modifier ?</th>
+    <th>Supprimer ?</th>
 
   </tr>
   </thead>

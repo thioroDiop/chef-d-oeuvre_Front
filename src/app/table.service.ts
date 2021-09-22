@@ -23,4 +23,8 @@ export class TableService {
   getGuestByTable(id: number):Observable<Guest[]>{
     return this.http.get<Guest[]>(this.baseUrl+'guests/table/'+id);
   }
+
+  getTableNotFull():Observable<WeddingTable>{
+    return  this.http.get<WeddingTable>(this.baseUrl+'tables/listeTableNonRempli')
+  }
 }

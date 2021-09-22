@@ -1,45 +1,51 @@
 <div class="container-fluid">
-<button type="button" class="btn btn-warning mb-2 btn-space"
-        title="Cliquez pour retourner Page d'acceuil "
-        routerLink="">Retour</button>
-<body>
-<header>
-
-</header>
-<!--<h1>Wedding Planning Proposal</h1>-->
+  <button type="button" class="btn btn-warning mb-2 btn-space"
+          title="Cliquez pour retourner Page d'acceuil "
+          routerLink="">Retour
+  </button>
 
 
- <div class="pageCover"  style="background-image:url(https://www.pandadoc.com/app/packages/templates/wedding-planning-proposal/img/cover-629d55f826.jpg);">
+
+
+  <div class="pageCover"
+       style="background-image:url(https://www.pandadoc.com/app/packages/templates/wedding-planning-proposal/img/cover-629d55f826.jpg);">
 
     <h1>Wedding Planning Proposal</h1>
 
+    <nav class="navbar ">
+      <div class="container fluid">
+        <!--        <ul class="nav navbar-nav">-->
+        <ul class="nav nav-pills">
+          <li><a class="nav-link active" routerLink="">Accueil</a></li>
+          <!--  Menu deroulant -->
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Gerer les invités
+              <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a routerLink="adminguest">Admin</a></li>
+              <li><a routerLink="adminguest/guest">Invités</a></li>
+            </ul>
+          </li>
 
-     <ul class="nav nav-pills">
-
-     <li><a class="nav-link active" routerLink="">Accueil</a></li>
-     <li class="header-nav_item"><a routerLink="/adminguest">Gerer les invités</a></li>
-
-     <br>
-     <li class="header-nav_item"> <a routerLink="/gift">Les cadeaux</a></li>
-       <li class="header-nav_item"> <a routerLink="/tables">Les Tables</a></li>
-   </ul>
-
-   <p><strong>Prepared for:</strong>
-     <br>
-   </p>
-   <p><strong>Created by:</strong><br>
-   </p>
+          <li class="header-nav_item"><a routerLink="/gift">Les cadeaux</a></li>
+          <li class="header-nav_item"><a routerLink="/tables">Les Tables</a></li>
+        </ul>
+      </div>
+    </nav>
+    <p><strong>Prepared for:</strong>
+      <br>
+    </p>
+    <p><strong>Created by:</strong><br>
+    </p>
   </div>
 
 
-
-<section id="weather-content" class="container fluid col-md-12">
-  <router-outlet></router-outlet>
-</section>
-
+  <section id="weather-content" class="container fluid col-md-12">
+    <router-outlet></router-outlet>
+  </section>
 
 
 
-
-</body>
 </div>
+
+
