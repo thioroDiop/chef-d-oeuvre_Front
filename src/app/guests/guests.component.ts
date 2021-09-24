@@ -24,13 +24,15 @@ import {GiftService} from "../gift.service";
 export class GuestsComponent implements OnInit {
 
   changeText = true;
+  guestOrganised = true;
+  listeDesTaches=true;
   task: Task | undefined;
   table: WeddingTable | undefined;
-  bridal: BridalCouple | undefined;
-  relationShip: RelationShip | undefined;
+
   role: Role | undefined;
   guestList: any;
-  b: any;
+  guestToPlace: Guest[] = [];
+
   taskList: Task[] = [];
   giftList: Gift[] = [];
   tableList: any;
@@ -41,6 +43,7 @@ export class GuestsComponent implements OnInit {
   newGuest: Guest | undefined;
   guestUpdated: Guest | undefined;
 
+
 //decalaration d'un Output qui gére les événements (Emission d'évenements vers le parent)
 
 
@@ -49,7 +52,6 @@ export class GuestsComponent implements OnInit {
               private relationService: RelationService, private roleService: RoleService,
               private giftService: GiftService) {
   }
-
 
 
   filterGuestForm = this.formBuilder.group({
@@ -83,47 +85,39 @@ export class GuestsComponent implements OnInit {
     this.tableService.getTableNotFull().subscribe(result => {
       this.tableList = result;
     })
-    this.bridalService.getBridalCouple().subscribe(result => {
-      this.bridalCouple = result;
-    })
+    /*  this.bridalService.getBridalCouple().subscribe(result => {
+        this.bridalCouple = result;
+      })*/
     this.roleService.getAllRole().subscribe(result => {
       this.roleList = result;
       console.log(this.roleList);
     })
-    this.relationService.getAllRelation().subscribe(result => {
-      this.relationShipList = result;
-    })
-    this.giftService.getAllGift().subscribe(result => {
-      this.giftList = result;
-    })
+    /*  this.relationService.getAllRelation().subscribe(result => {
+        this.relationShipList = result;
+      })
+      this.giftService.getAllGift().subscribe(result => {
+        this.giftList = result;
+      })*/
   }
 
-
+  /**
+   * methode pour ouvrir le formulaire pou ajouter ou modifier un invité
+   * @constructor
+   */
   AddGuest() {
     this.changeText = false;
 
   }
 
 
-  /*updateGuest(guest: Guest) {
-    console.log(guest);
-    this.guestService.updateGuest(guest).subscribe(() => {
-      console.log("L'invité " + guest.id + " a bien été mise à jour");
-      this.guestList = this.guestService.getAllGuest();
-    });
-  }*/
-
-
 //lorsque 'lon choisi un nom  , on le recupére de task grace à  l'id
   onTaskChange() {
     if (this.filterGuestForm.get('task')?.value != 0) {
-      //apell de la fonction qui retoure un task, l'id est recupére avec la valeur du filterForm
+      //apell de la fonction qui retourne un task, l'id est recupére avec la valeur du filterForm
       this.taskService.getAllTask().subscribe(result => {
         this.task = this.filterGuestForm.get('task')?.value;
         console.log(this.task);
       });
-
-
     }
   }
 
@@ -137,29 +131,8 @@ export class GuestsComponent implements OnInit {
     }
   }
 
-  //on recupére le marié qui a invité
-  onCoupleChange() {
-    if (this.filterGuestForm.get('bridal')?.value != 0) {
-      this.bridalService.getBridalCouple().subscribe(result => {
-        this.bridal = this.filterGuestForm.get('bridal')?.value;
-        console.log(this.bridal);
-      })
-    }
-  }
-
-//on recupére le type de relation avec les mariées
-  onRelationChange() {
-    this.relationService.getAllRelation().subscribe(() => {
-      console.log('Detail de mon objet relation selectionnée');
-//je recupere le detail le relation selectionné
-      this.relationShip = this.filterGuestForm.get('relationShip')?.value;
-      console.log(this.relationShip);
-    });
-  }
-
 
   //on recupére le type de role
-
   onRoleChange() {
     this.roleService.getAllRole().subscribe(() => {
       console.log('Detail de mon objet Role selectionné');
@@ -170,16 +143,11 @@ export class GuestsComponent implements OnInit {
 
   }
 
-  onGiftChange() {
-    this.giftService.getAllGift().subscribe(() => {
-      console.log('Detail de mon objet gift selectionné');
-//je recupere le detail le gift selectionné
-      console.log(this.filterGuestForm.get('gift')?.value);
-    });
-  }
 
-
-
+  /**
+   * Methode pour recupérer les valeurs du formulaire
+   * @param guest
+   */
   updateGuest(guest: Guest) {
     this.changeText = false;
     console.log(guest);
@@ -189,13 +157,12 @@ export class GuestsComponent implements OnInit {
       lastName: guest.lastName,
       email: guest.email,
       accommodation: guest.accommodation,
-     // task:this.taskService.getTaskById( guest.task.id).subscribe(),
       task: guest.task,
-    table: guest.table,
-      relationShip: guest.relationShip,
+      table: guest.table,
+      // relationShip: guest.relationShip,
       role: guest.role,
-      bridal: guest.bridal,
-      gift: guest.gift,
+      // bridal: guest.bridal,
+      //gift: guest.gift,
     });
     this.guestUpdated = guest;
     console.log(this.guestUpdated);
@@ -211,19 +178,29 @@ export class GuestsComponent implements OnInit {
       console.log(this.guestUpdated);
       // Remplissage de l'attribut guestUpdated
       // this.guestUpdated = guest;
-      this.guestService.updateGuest(this.guestUpdated).subscribe(()=>{
+      this.guestService.updateGuest(this.guestUpdated).subscribe(() => {
         //je met a jour la liste de guest
         this.guestService.getAllGuest().subscribe(result => {
           this.guestList = result;
         });
-
+        //je met a jour la liste de guest à placer
+        this.guestService.organiseGuest().subscribe(result => {
+          this.guestToPlace = result;
+        });
+        //Je met a jour la liste de tables qui peut changer
+        this.tableService.getTableNotFull().subscribe(result => {
+          this.tableList = result;
+        })
       });
       console.log("Le guest a bien été mis à jour");
-
       // je vide mon objet guestUpdated
       this.guestUpdated = undefined;
       //je vide le formulaire
       this.filterGuestForm.reset();
+      //je referme le formulaire
+      this.changeText = true;
+      //je referme la table et la div des invités à organiser
+      this.guestOrganised = true;
     }
 
     // Sinon, alors je peux créer un nouveau guest
@@ -232,8 +209,8 @@ export class GuestsComponent implements OnInit {
       console.log("je suis dans la fonction create");
       this.newGuest = this.filterGuestForm.value;
       // @ts-ignore
-      this.newGuest?.table=this.filterGuestForm.get('table')?.value;
-      console.log( this.newGuest);
+      this.newGuest?.table = this.filterGuestForm.get('table')?.value;
+      console.log(this.newGuest);
       this.guestService.createGuest(this.newGuest).subscribe(() => {
         console.log("l'invité a bien été crée");
         //je met a jour la liste de guest
@@ -245,7 +222,7 @@ export class GuestsComponent implements OnInit {
           this.tableList = result;
         })
       });
-console.log(this.newGuest);
+      console.log(this.newGuest);
       //je vide le formulaire
       this.filterGuestForm.reset();
       //je referme le formulaire
@@ -258,10 +235,39 @@ console.log(this.newGuest);
   deleteGuest(guestId: number) {
     this.guestService.deleteGuest(guestId).subscribe(() => {
       console.log("L'invité " + guestId + " a bien été supprimé");
+      //je met a jour la liste des invités
       this.guestService.getAllGuest().subscribe(result => {
         this.guestList = result;
       });
+      //je met a jour la liste de guest à placer
+      this.guestService.organiseGuest().subscribe(result => {
+        this.guestToPlace = result;
+      });
     });
+  }
+
+  /**
+   * methode qui permet d'ouvrir la tables des invités à organiser
+   */
+  organiseGuest() {
+//au clic ouvre ou ferme
+    if (this.guestOrganised == true) {
+      this.guestOrganised = false;
+    } else
+      this.guestOrganised = true;
+    //mettre a jour la liste des personnes à positionner
+    this.guestService.organiseGuest().subscribe(result => {
+      this.guestToPlace = result;
+    });
+  }
+
+
+  OpenTaskList() {
+    if (this.listeDesTaches == true) {
+      this.listeDesTaches = false;
+    } else
+      this.listeDesTaches = true;
+
   }
 
 

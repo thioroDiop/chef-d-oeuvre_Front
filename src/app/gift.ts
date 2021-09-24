@@ -9,4 +9,5 @@ export interface Gift {
   price:number;
 
   imageUrl:string;
+
 }

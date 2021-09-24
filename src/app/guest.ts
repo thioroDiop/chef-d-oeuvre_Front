@@ -17,4 +17,5 @@ import {Gift} from "./gift";
   role:  Role;
    bridal: BridalCouple;
    gift:Gift;
+   amountParticipation:number;
 }

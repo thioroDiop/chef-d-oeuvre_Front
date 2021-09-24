@@ -32,7 +32,9 @@ baseUrl ='http://localhost:8080/api/';
     return this.http.put<Guest>(this.baseUrl+'guests/guest/update' ,guest);
   }
 
-
+organiseGuest():Observable<Guest[]> {
+  return this.http.get<Guest[]>(this.baseUrl + 'guests/palced');
+}
 
 
 

@@ -30,4 +30,7 @@ export class GiftService {
     return this.http.get<number>(this.baseUrl + 'gifts'+ '/count');
   }
 
+  getGiftAndAmount():Observable<Object>{
+    return this.http.get<Object>(this.baseUrl + 'gifts/amount');
+  }
 }

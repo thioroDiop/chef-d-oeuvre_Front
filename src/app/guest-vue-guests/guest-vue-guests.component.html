@@ -1,3 +1,71 @@
-<p>guest-vue-guests works!</p>
+<p>
+  <button (click)="AddGuest()">Je m'enregistre</button>
+</p>
+<div id="newguest" [hidden]="changeText">
+
+  <form [formGroup]="filterGuestForm" (ngSubmit)="saveGuest()">
+
+    <input type="hidden" id="guest_id" class="form-control" formControlName="id">
+    <label for="firstName">FirstName : </label>
+    <input id="firstName" type="text" required="true" formControlName="firstName">
+    <label for="lastName">LastName : </label>
+    <input id="lastName" type="text" required="true" formControlName="lastName">
+    <label for="email">Email : </label>
+    <input id="email" type="text" formControlName="email">
+
+
+    <select formControlName="bridal" (change)="onCoupleChange()">
+      <option value="null">--Invité par--</option>
+      <option *ngFor="let bridge of bridalCouple" [ngValue]="bridge">{{bridge.name | uppercase}}</option>
+    </select>
+
+    <select formControlName="relationShip" required="false" (change)="onRelationChange()">
+      <option value="null">--Relation--</option>
+      <option *ngFor="let relationShip of relationShipList"
+              [ngValue]="relationShip">{{relationShip.relationType | uppercase}}</option>
+    </select>
+    <select formControlName="giftChoice" required="false" (change)="onGiftChange()">
+      <option value="null">--Souhaitez vous participer à liste de Mariage?--</option>
+      <option value="Oui">Oui</option>
+      <option value="Non">Non</option>
+    </select>
+    <select [hidden]="ajoutCadeau" formControlName="gift" required="false" (change)="onGiftChoice()">
+      <option value="null">--Choisissez un cadeau!--</option>
+      <option *ngFor="let gift of giftList" [ngValue]="gift">{{gift.name | uppercase}}</option>
+    </select>
+
+    <label [hidden]="ajoutMontant" for="montantCadeau">Montant de  : </label>
+    <input [hidden]="ajoutMontant" id="montantCadeau" type="text" formControlName="amountParticipation"  placeholder="Votre participation?">
+
+    <button title="Cliquez pour enregistrer" type="submit"> Enregisrer ma présence</button>
+  </form>
+</div>
+<br>
+
+
+<!--tableau-->
+<div [hidden]="ajoutCadeau">
+  <h3 style="text-align: center">Voici les cadeaux pour lesquels vous pouvez encore participer!</h3>
+  <div class="container container-table" style="width: 500px;text-align: center; border: dashed">
+    <table class="table">
+      <thead class="thead-light" style="text-align: center">
+      <tr>
+        <th>Descriptif</th>
+        <th>Prix </th>
+        <th>Montant des participations</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let gift of giftAndAmountList">
+        <td *ngIf="gift[4]>gift[5]" >{{gift[1]}}</td>
+        <td *ngIf="gift[4]>gift[5]">{{gift[4]}}€</td>
+        <td *ngIf="gift[4]>gift[5]">{{gift[5]}}€</td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 

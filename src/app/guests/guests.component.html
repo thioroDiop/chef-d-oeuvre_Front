@@ -21,29 +21,46 @@
       <option value="null">--Choisir la Table--</option>
       <option *ngFor="let table of tableList | oderByPipe:'id' " [ngValue]="table"> {{table.id}} </option>
     </select>
-    <select formControlName="bridal" (change)="onCoupleChange()" >
-      <option value="null">--Invité par--</option>
-      <option *ngFor="let bridge of bridalCouple" [ngValue]="bridge">{{bridge.name | uppercase}}</option>
-    </select>
+
     <select formControlName="role" (change)="onRoleChange()">
       <!--    on value O pour qu'il affiche la premiere valeur par défault-->
       <option value="null">-- Choisir un Role--</option>
       <option *ngFor="let role of roleList" [ngValue]="role">{{role.description | uppercase}}</option>
     </select>
-    <select formControlName="relationShip" required="false" (change)="onRelationChange()" >
-      <option value="null">--Relation--</option>
-      <option *ngFor="let relationShip of relationShipList" [ngValue]="relationShip">{{relationShip.relationType | uppercase}}</option>
-    </select>
-    <select formControlName="gift" required="false"(change)="onGiftChange()" >
-      <option value="null">--Avez vous un Cadeau?--</option>
-      <option *ngFor="let gift of giftList" [ngValue]="gift">{{gift.name | uppercase}}</option>
-    </select>
 
-    <button   title="Cliquez pour enregistrer"  type="submit"> Sauvegarder l'invité</button>
+    <button  class="btn btn-success mb-2" title="Cliquez pour enregistrer"  type="submit"> Sauvegarder </button>
   </form>
 </div>
-<br>
-<table class="table table-striped withEspace">
+
+<h5><button class="btn btn-primary mb-2" (click)="organiseGuest()" >Cliquer pour placer les invités</button></h5>
+<div [hidden]="guestOrganised" *ngIf="guestToPlace?.length==0">Il n'y a plus personne à placer</div>
+
+<div class="container container-table" style="width: 500px;text-align: center">
+  <h3 [hidden]="guestOrganised">Liste des Invités à organiser</h3>
+<table [hidden]="guestOrganised" class="table table-striped withEspace" *ngIf="guestToPlace?.length!=0">
+  <thead>
+  <tr>
+    <th>Nom </th>
+    <th>Prenom</th>
+    <th>Email</th>
+    <th>Modifier ?</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let guest of guestToPlace ">
+    <td>{{guest.lastName}}</td>
+    <td>{{guest.firstName}}</td>
+    <td>{{guest.email}}</td>
+    <td><button class="btn btn-warning mb-2" (click)="updateGuest(guest)">Modify 🖊 </button></td>
+  </tr>
+  </tbody>
+</table>
+</div>
+<hr/>
+
+<h3>Liste des Invités</h3>
+<table class="table table-striped withEspace" >
   <thead>
   <tr>
     <th>Nom </th>
@@ -65,4 +82,15 @@
   </tbody>
 </table>
 
+<hr/>
+<h3></h3>
+<button type="button" class="btn btn-info mb-2" (click)="OpenTaskList()">Liste des Taches, Qui fait Quoi?</button>
+<div [hidden]="listeDesTaches" class="containerBadge  no-gutters" style="font-family:Gabriola; "  >
 
+    <div class="col-md-8 " *ngFor="let task of taskList" [hidden]="listeDesTaches"  >
+      <h3 ><b>{{task.description}}</b></h3>
+      <h4 *ngFor="let guest of task.guestList" ><i>{{guest.firstName}} {{guest.lastName}}</i></h4>
+    </div>
+
+</div>
+<hr/>
