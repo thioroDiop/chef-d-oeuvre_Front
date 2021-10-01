@@ -20,4 +20,9 @@
     float: left;
     font-weight: bold;
   }
+
+ div.form-group{
+   /*margin: 0;*/
+   padding: 0;
+ }
 }

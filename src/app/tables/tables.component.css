@@ -25,7 +25,7 @@ h4{
   display: grid;
   padding: 5%;
   flex-wrap: wrap;
-  grid-template-columns: repeat(2, 1fr);
+  /*grid-template-columns: repeat(2, 1fr);*/
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -33,6 +33,9 @@ background-image: url("src/assets/plan-tables.jpg");
 
 }
 
+@media (min-width: 900px) {
+  .containerBadge { grid-template-columns: repeat(2, 1fr); }
+}
 
 #nomPays{
   width: 40%;

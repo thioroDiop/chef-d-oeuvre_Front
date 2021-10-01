@@ -28,11 +28,9 @@ export class GuestsComponent implements OnInit {
   listeDesTaches=true;
   task: Task | undefined;
   table: WeddingTable | undefined;
-
   role: Role | undefined;
   guestList: any;
   guestToPlace: Guest[] = [];
-
   taskList: Task[] = [];
   giftList: Gift[] = [];
   tableList: any;
@@ -46,7 +44,6 @@ export class GuestsComponent implements OnInit {
 
 //decalaration d'un Output qui gére les événements (Emission d'évenements vers le parent)
 
-
   constructor(private guestService: GuestService, private taskService: TaskService, private formBuilder: FormBuilder,
               private tableService: TableService, private  bridalService: BridalService,
               private relationService: RelationService, private roleService: RoleService,
@@ -55,7 +52,6 @@ export class GuestsComponent implements OnInit {
 
 
   filterGuestForm = this.formBuilder.group({
-    relationShip: null,
     role: null,
     task: null, //la value  de l'option du formulaire par defaut
     firstName: '',
@@ -63,8 +59,6 @@ export class GuestsComponent implements OnInit {
     lastName: '',
     email: '',
     table: null,//par defaut la valeur est à 0
-    bridal: null,
-    gift: null,
     id: 0,
   });
 
