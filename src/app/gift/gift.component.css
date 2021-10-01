@@ -1,6 +1,5 @@
 .toto{
   display: grid;
-  /*grid-template-columns: repeat(3, 1fr);*/
   grid-auto-columns: 50px;
   grid-gap: 3px;
 }
@@ -19,9 +18,9 @@
 }
 
 img{
-  width: 400px;
-  height: 400px;
-
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
 }
 .row{
   width: 500px;

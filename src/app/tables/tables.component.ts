@@ -11,7 +11,7 @@ import {Guest} from "../guest";
 export class TablesComponent implements OnInit {
   tableList: WeddingTable[] = [];
   guestlist: Guest[]=[];
-  tableGuest:any[]=[];
+
 
   constructor(private tableService: TableService) {
   }
@@ -24,14 +24,5 @@ export class TablesComponent implements OnInit {
   };
 
 
-
-
-  select(tableId: number) {
-    this.tableService.getGuestByTable(tableId).subscribe(result => {
-      this.guestlist = result;
-      console.log(this.guestlist);
-    });
-
-  }
 
 }

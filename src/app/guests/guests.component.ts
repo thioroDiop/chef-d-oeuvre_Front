@@ -32,22 +32,18 @@ export class GuestsComponent implements OnInit {
   guestList: any;
   guestToPlace: Guest[] = [];
   taskList: Task[] = [];
-  giftList: Gift[] = [];
   tableList: any;
-  bridalCouple: any;
-  relationShipList: any;
   roleList: any;
 // Je déclare mon attribut newGuest qui me permettra de voir le guest édité dans la vue
   newGuest: Guest | undefined;
   guestUpdated: Guest | undefined;
 
 
-//decalaration d'un Output qui gére les événements (Emission d'évenements vers le parent)
 
   constructor(private guestService: GuestService, private taskService: TaskService, private formBuilder: FormBuilder,
               private tableService: TableService, private  bridalService: BridalService,
               private relationService: RelationService, private roleService: RoleService,
-              private giftService: GiftService) {
+              ) {
   }
 
 
@@ -86,12 +82,7 @@ export class GuestsComponent implements OnInit {
       this.roleList = result;
       console.log(this.roleList);
     })
-    /*  this.relationService.getAllRelation().subscribe(result => {
-        this.relationShipList = result;
-      })
-      this.giftService.getAllGift().subscribe(result => {
-        this.giftList = result;
-      })*/
+
   }
 
   /**
@@ -103,25 +94,24 @@ export class GuestsComponent implements OnInit {
 
   }
 
-
-//lorsque 'lon choisi un nom  , on le recupére de task grace à  l'id
+  /**
+   * lorsque l'on choisi le nom d'une tache  , on le recupére de task concerné
+   */
   onTaskChange() {
     if (this.filterGuestForm.get('task')?.value != 0) {
-      //apell de la fonction qui retourne un task, l'id est recupére avec la valeur du filterForm
-      this.taskService.getAllTask().subscribe(result => {
-        this.task = this.filterGuestForm.get('task')?.value;
-        console.log(this.task);
-      });
+      this.task = this.filterGuestForm.get('task')?.value;
+      console.log(this.task);
     }
   }
 
-  //on recupére la table choisie
+
+  /**
+   * on récupére la table choisie dans le formulaire dans la variable table
+   */
   onTableChange() {
-    if (this.filterGuestForm.get('table')?.value != 0) {
-      this.tableService.getTableNotFull().subscribe(result => {
-        this.table = this.filterGuestForm.get('table')?.value;
-        console.log(this.table);
-      })
+    if (this.filterGuestForm.get('table')?.value != 0)
+    { this.table = this.filterGuestForm.get('table')?.value;
+      console.log(this.table);
     }
   }
 
@@ -139,12 +129,12 @@ export class GuestsComponent implements OnInit {
 
 
   /**
-   * Methode pour recupérer les valeurs du formulaire
+   * Methode pour recupérer les valeurs du formulaire.
    * @param guest
    */
   updateGuest(guest: Guest) {
     this.changeText = false;
-    console.log(guest);
+    //Gestion de l'événement clic sur "Modifier" ==> je remplis les champs du formulaire
     this.filterGuestForm.patchValue({
       id: guest.id,
       firstName: guest.firstName,
@@ -153,25 +143,20 @@ export class GuestsComponent implements OnInit {
       accommodation: guest.accommodation,
       task: guest.task,
       table: guest.table,
-      // relationShip: guest.relationShip,
       role: guest.role,
-      // bridal: guest.bridal,
-      //gift: guest.gift,
     });
     this.guestUpdated = guest;
-    console.log(this.guestUpdated);
   }
 
-
+  /**
+   * fonction pour enregister un nouveau invité dans la BDD ou met à jour si l'invité existe déja
+   */
   saveGuest() {
-
-    // Gestion de l'événement clic sur "Modifier" ==> je remplis les champs du formulaire
-    // Si ma propriété GuestUpdated est défini, alors je peux le mettre à jour
+    // Si ma propriété GuestUpdated est défini ou existe déja, alors je peux le mettre à jour
     if (this.guestUpdated) {
       this.guestUpdated = this.filterGuestForm.value;
       console.log(this.guestUpdated);
-      // Remplissage de l'attribut guestUpdated
-      // this.guestUpdated = guest;
+
       this.guestService.updateGuest(this.guestUpdated).subscribe(() => {
         //je met a jour la liste de guest
         this.guestService.getAllGuest().subscribe(result => {
@@ -193,7 +178,7 @@ export class GuestsComponent implements OnInit {
       this.filterGuestForm.reset();
       //je referme le formulaire
       this.changeText = true;
-      //je referme la table et la div des invités à organiser
+      //je referme la table et la div des invités à organiser qui peut aussi faire une modif
       this.guestOrganised = true;
     }
 
@@ -204,7 +189,6 @@ export class GuestsComponent implements OnInit {
       this.newGuest = this.filterGuestForm.value;
       // @ts-ignore
       this.newGuest?.table = this.filterGuestForm.get('table')?.value;
-      console.log(this.newGuest);
       this.guestService.createGuest(this.newGuest).subscribe(() => {
         console.log("l'invité a bien été crée");
         //je met a jour la liste de guest
@@ -216,7 +200,6 @@ export class GuestsComponent implements OnInit {
           this.tableList = result;
         })
       });
-      console.log(this.newGuest);
       //je vide le formulaire
       this.filterGuestForm.reset();
       //je referme le formulaire
