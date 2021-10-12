@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
       username: this.username?.value,
       password: this.password?.value
     }).subscribe(() => this.router.navigate(['']));//route vers la racine en cas de succes
+    console.log(this.userService.getRoles());
   }
 
   //recupere le username renseigné dans le formulaire

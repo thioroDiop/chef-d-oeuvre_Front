@@ -11,11 +11,12 @@ import {tap} from "rxjs/operators";
   providedIn: 'root'
 })
 export class UserService {
-  apiUrl ='http://localhost:8080';
-  // @ts-ignore
-  static readonly JWT_STORAGE_KEY = this.apiUrl + 'JWT_QUOTES_API';
-  private readonly AUTH_ENDPOINT = this.apiUrl + '/authentication';
-  private readonly USER_ENDPOINT = this.apiUrl + '/admin/users';
+
+  isLoggedin: boolean = false;
+ // static readonly JWT_STORAGE_KEY = environment.apiUrl + 'JWT_QUOTES_API';
+  static readonly JWT_STORAGE_KEY = environment.apiUrl ;
+  private readonly AUTH_ENDPOINT = environment.apiUrl+ '/authentication';
+  private readonly USER_ENDPOINT = environment.apiUrl + '/admin/users';
 
   constructor(private http: HttpClient) {
   }
@@ -26,6 +27,10 @@ export class UserService {
         //met le token dans la session Storage
         sessionStorage.setItem(UserService.JWT_STORAGE_KEY, jwt.idToken);
       }));
+  }
+
+  signOut(): void {
+    sessionStorage.clear();
   }
 
   signUp(user: User): Observable<any> {
@@ -51,6 +56,18 @@ export class UserService {
       return tokenPayload.auth.split(",")
     }
     return [];
+  }
+
+  //fonction pour verifier si on est connecté
+  isLoggedIn():boolean {
+let roles=this.getRoles();
+    if (roles.length > 0) {
+      this.isLoggedin = true;
+      return this.isLoggedin;
+    }
+    else {
+      return false;
+    }
   }
 
 }

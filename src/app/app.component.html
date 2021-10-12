@@ -1,7 +1,8 @@
 <div class="container-fluid">
+<!--  boutton qui va apparaitre que s'il ya un utilisateur connecté-->
   <button type="button" class="btn btn-warning mb-2 btn-space"
-          title="Cliquez pour retourner Page d'acceuil "
-          routerLink="">Retour
+          title="Cliquez pour retourner Page d'acceuil " (click)="logOut()"
+          routerLink="" *ngIf="isLoggedIn()" >Retour/Deconnection
   </button>
 
 
