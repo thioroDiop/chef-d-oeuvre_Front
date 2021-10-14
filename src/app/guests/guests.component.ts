@@ -90,8 +90,11 @@ export class GuestsComponent implements OnInit {
    * @constructor
    */
   AddGuest() {
-    this.changeText = false;
 
+    if (this.changeText == true) {
+      this.changeText = false;
+    } else
+      this.changeText = true;
   }
 
   /**

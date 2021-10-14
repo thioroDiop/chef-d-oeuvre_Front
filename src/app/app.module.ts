@@ -37,12 +37,17 @@ HttpClientModule,
     RouterModule.forRoot([
      // {path: '', component: PageAcceuilComponent},
      // {path:'adminguest', component:GuestsComponent},
-      {path:'gift', component:GiftComponent},
+      //{path:'gift', component:GiftComponent},
      // {path:'adminguest/guest', component:GuestVueGuestsComponent},
     // {path:'tables',component:TablesComponent},
       {
         path: '',
         component: PageAcceuilComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ["ROLE_GUEST", "ROLE_ADMIN"]}
+      },{
+        path: 'login',
+        component: LoginComponent,
         canActivate: [AuthGuard],
         data: {roles: ["ROLE_GUEST", "ROLE_ADMIN"]}
       },
@@ -61,12 +66,19 @@ HttpClientModule,
         canActivate: [AuthGuard],
         data: {roles: [ "ROLE_GUEST", "ROLE_ADMIN"]}
       },
-      /*{
+      {
         path: 'gift',
         component: GiftComponent,
         canActivate: [AuthGuard],
-        data: {roles: [ "ROLE_GUEST", "ROLE_ADMIN"]}
-      }*/
+        data: {roles: ["ROLE_GUEST", "ROLE_ADMIN"]}
+      },
+      {
+        path: '**',//toutes les routes inconnus, on les redirige vers la page d'acceuil
+        component: PageAcceuilComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ["ROLE_GUEST", "ROLE_ADMIN"]}
+      },
+
     ])
   ],
 

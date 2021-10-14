@@ -13,8 +13,9 @@ import {tap} from "rxjs/operators";
 export class UserService {
 
   isLoggedin: boolean = false;
- // static readonly JWT_STORAGE_KEY = environment.apiUrl + 'JWT_QUOTES_API';
-  static readonly JWT_STORAGE_KEY = environment.apiUrl ;
+  admin:boolean=false;
+ static readonly JWT_STORAGE_KEY = environment.apiUrl + 'JWT_QUOTES_API';
+  //static readonly JWT_STORAGE_KEY = environment.apiUrl ;
   private readonly AUTH_ENDPOINT = environment.apiUrl+ '/authentication';
   private readonly USER_ENDPOINT = environment.apiUrl + '/admin/users';
 
@@ -68,6 +69,16 @@ let roles=this.getRoles();
     else {
       return false;
     }
+  }
+
+  //fonction pour savoir si c'est l'admin qui est authentifier
+  isAdmin():boolean{
+    let roles=this.getRoles();
+    roles.forEach ((role )=>
+    {      if (role.localeCompare("ROLE_ADMIN")==0)
+      this.admin=true;
+        });
+    return this.admin ;
   }
 
 }

@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {GiftService} from "../gift.service";
 // @ts-ignore
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {UserService} from "../user.service";
 
 
 @Component({
@@ -14,7 +15,7 @@ export class GiftComponent implements OnInit {
   guestListByGift: any
 
 
-  constructor(private giftService: GiftService) {
+  constructor(private giftService: GiftService,private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -68,5 +69,9 @@ console.log(idGift);
 
   onNotify() {
     window.alert('Personne n\'a partcipé à ce cadeau');
+  }
+
+  isAdmin():boolean{
+    return this.userService.isAdmin();
   }
 }

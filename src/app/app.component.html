@@ -1,8 +1,8 @@
 <div class="container-fluid">
 <!--  boutton qui va apparaitre que s'il ya un utilisateur connecté-->
-  <button type="button" class="btn btn-warning mb-2 btn-space"
-          title="Cliquez pour retourner Page d'acceuil " (click)="logOut()"
-          routerLink="" *ngIf="isLoggedIn()" >Retour/Deconnection
+  <button mdbBtn type="button" color="indigo" mdbWavesEffect
+          title="Cliquez pour vous déconnecter" (click)="logOut()"
+          routerLink="" *ngIf="isLoggedIn()" >Deconnection
   </button>
 
 
@@ -23,13 +23,14 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Gerer les invités
               <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a routerLink="adminguest">Admin</a></li>
+              <li><a routerLink="adminguest/admin">Admin</a></li>
               <li><a routerLink="adminguest/guest">Invités</a></li>
             </ul>
           </li>
 
           <li class="header-nav_item"><a routerLink="/gift">Les cadeaux</a></li>
           <li class="header-nav_item"><a routerLink="/tables">Les Tables</a></li>
+          <li class="header-nav_item"><a routerLink="/login">Login</a></li>
         </ul>
       </div>
     </nav>
