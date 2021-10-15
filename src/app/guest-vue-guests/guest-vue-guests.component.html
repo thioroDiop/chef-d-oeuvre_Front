@@ -6,9 +6,9 @@
   <form [formGroup]="filterGuestForm" (ngSubmit)="saveGuest()">
 
     <input type="hidden" id="guest_id" class="form-control" formControlName="id">
-    <label for="firstName">FirstName : </label>
+    <label for="firstName">Prenom : </label>
     <input id="firstName" type="text" required="true" formControlName="firstName">
-    <label for="lastName">LastName : </label>
+    <label for="lastName">Nom : </label>
     <input id="lastName" type="text" required="true" formControlName="lastName">
     <label for="email">Email : </label>
     <input id="email" type="text" formControlName="email">

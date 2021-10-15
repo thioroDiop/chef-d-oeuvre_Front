@@ -45,11 +45,10 @@ HttpClientModule,
         component: PageAcceuilComponent,
         canActivate: [AuthGuard],
         data: {roles: ["ROLE_GUEST", "ROLE_ADMIN"]}
-      },{
+      },
+      {//acces à ce router sans etre connecté
         path: 'login',
         component: LoginComponent,
-        canActivate: [AuthGuard],
-        data: {roles: ["ROLE_GUEST", "ROLE_ADMIN"]}
       },
       {
         path: 'adminguest/admin',
@@ -58,8 +57,9 @@ HttpClientModule,
         data: {roles: [ "ROLE_ADMIN"]}
       },
       {path: 'adminguest/guest', component: GuestVueGuestsComponent,
-        canActivate: [AuthGuard], data: {roles: ["ROLE_ADMIN","ROLE_GUEST"]}},
-      {path: 'login', component: LoginComponent},
+        canActivate: [AuthGuard], data: {roles: ["ROLE_ADMIN","ROLE_GUEST"]}
+        },
+
       {
         path: 'tables',
         component: TablesComponent,

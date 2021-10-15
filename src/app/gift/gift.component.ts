@@ -13,9 +13,9 @@ import {UserService} from "../user.service";
 export class GiftComponent implements OnInit {
 
   guestListByGift: any
+  admine:boolean=false;
 
-
-  constructor(private giftService: GiftService,private userService: UserService) {
+  constructor(private giftService: GiftService,private userService:UserService) {
   }
 
   ngOnInit(): void {
@@ -71,7 +71,10 @@ console.log(idGift);
     window.alert('Personne n\'a partcipé à ce cadeau');
   }
 
-  isAdmin():boolean{
-    return this.userService.isAdmin();
-  }
+isadmin():boolean{
+    this.admine=this.userService.isAdmin();
+    return this.admine;
+    console.log("coucou "+this.admine);
+}
+
 }

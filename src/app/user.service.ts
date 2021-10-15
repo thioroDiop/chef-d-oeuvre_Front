@@ -74,11 +74,13 @@ let roles=this.getRoles();
   //fonction pour savoir si c'est l'admin qui est authentifier
   isAdmin():boolean{
     let roles=this.getRoles();
-    roles.forEach ((role )=>
-    {      if (role.localeCompare("ROLE_ADMIN")==0)
+    //roles.forEach ((role )=>
+   // {      //if (role.localeCompare("ROLE_ADMIN")==0)
+      if (roles[roles.length-1]==="ROLE_ADMIN") // le dernier role, pour dire le role en cours
       this.admin=true;
-        });
+       // });
     return this.admin ;
+    console.log(this.admin );
   }
 
 }
