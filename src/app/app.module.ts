@@ -11,7 +11,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 
 import { TablesComponent } from './tables/tables.component';
-import { OderByPipePipe } from './oder-by-pipe.pipe';
+
 import { GuestVueGuestsComponent } from './guest-vue-guests/guest-vue-guests.component';
 import {AuthGuard} from "./auth.guard";
 import {LoginComponent} from "./login/login.component";
@@ -25,7 +25,7 @@ import {JwtInterceptor} from "./jwt.interceptor";
     GiftComponent,
 LoginComponent,
     TablesComponent,
-    OderByPipePipe,
+   // OderByPipePipe,
     GuestVueGuestsComponent
   ],
   imports: [

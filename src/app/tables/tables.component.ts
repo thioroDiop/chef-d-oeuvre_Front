@@ -10,12 +10,11 @@ import {Guest} from "../guest";
 })
 export class TablesComponent implements OnInit {
   tableList: WeddingTable[] = [];
-  guestlist: Guest[]=[];
-
 
   constructor(private tableService: TableService) {
   }
 
+  //j'appelle la fonction du service qui m'envoie la liste des tables evc les invités avec chaque table
   ngOnInit(): void {
     this.tableService.getAllTable().subscribe(result => {
       this.tableList = result;

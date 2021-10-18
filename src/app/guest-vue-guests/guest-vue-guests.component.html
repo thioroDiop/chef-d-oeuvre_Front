@@ -34,8 +34,9 @@
       <option *ngFor="let gift of giftList" [ngValue]="gift">{{gift.name | uppercase}}</option>
     </select>
 
-    <label [hidden]="ajoutMontant" for="montantCadeau">Montant de  : </label>
-    <input [hidden]="ajoutMontant" id="montantCadeau" type="text" formControlName="amountParticipation"  placeholder="Votre participation?">
+    <label [hidden]="ajoutMontant" for="montantCadeau">Montant de : </label>
+    <input [hidden]="ajoutMontant" id="montantCadeau" type="text" formControlName="amountParticipation"
+           placeholder="Votre participation?">
 
     <button title="Cliquez pour enregistrer" type="submit"> Enregisrer ma présence</button>
   </form>
@@ -51,14 +52,15 @@
       <thead class="thead-light" style="text-align: center">
       <tr>
         <th>Descriptif</th>
-        <th>Prix </th>
+        <th>Prix</th>
         <th>Montant des participations</th>
 
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let gift of giftAndAmountList">
-        <td *ngIf="gift[4]>gift[5]" >{{gift[1]}}</td>
+<!--        je n'affiche que les cadeaux dont le prix est > au montant de la participation-->
+        <td *ngIf="gift[4]>gift[5]">{{gift[1]}}</td>
         <td *ngIf="gift[4]>gift[5]">{{gift[4]}}€</td>
         <td *ngIf="gift[4]>gift[5]">{{gift[5]}}€</td>
 

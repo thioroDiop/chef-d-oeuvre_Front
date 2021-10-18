@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {GiftService} from "../gift.service";
 // @ts-ignore
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {UserService} from "../user.service";
 
 
@@ -13,31 +13,30 @@ import {UserService} from "../user.service";
 export class GiftComponent implements OnInit {
 
   guestListByGift: any
-  admine:boolean=false;
+  admine: boolean = false;
 
-  constructor(private giftService: GiftService,private userService:UserService) {
+  constructor(private giftService: GiftService, private userService: UserService) {
   }
 
   ngOnInit(): void {
-   /* this.giftService.getAllGift().subscribe(result => {
-      this.giftList = result;
-    });
-    console.log(this.giftList);*/
+    //calcule le nombre de page pour la taille choisi
     this.calculatePageCount();
+    //on vérifie si c'est admin qui s'est connecté au chargement de la page
+    this.admine = this.userService.isAdmin();
+
   }
 
 
 //fonction appelée au click sur le bouton "show people"
   displayStyle = "none";
-  openPopup(idGift: number) {
 
+  openPopup(idGift: number) {
+//rendre visible la div du popover
     this.displayStyle = "block";
+    //avoir la liste des invités pour l'id du cadeau
     this.giftService.getGuestByGift(idGift).subscribe(result => {
       this.guestListByGift = result;
-      // @ts-ignore
-     // if(result==0){window.alert('Personne n\'a partcipé à ce cadeau');}
     });
-console.log(idGift);
   }
 
   // je referme la fenetre des details
@@ -52,14 +51,16 @@ console.log(idGift);
 
   pageCount = 0;
   pages: number[] = [];
-
+//liste des cadeaux par page et nombre d'element(page.size)
   giftList = this.giftService.getPaginatedGifts(this.page.number, this.page.size);
 
+  //a chaque changement de page /de taille,metAjour la liste et recalcule le nombre de pages correspondant
   onPageDetailsChange() {
     this.calculatePageCount();
     this.giftList = this.giftService.getPaginatedGifts(this.page.number, this.page.size);
   }
 
+  //fonction qui calcule le nombre de page pour un nombre d'element(page.size)
   private calculatePageCount() {
     this.giftService.getTotalGiftsCount().subscribe(count => {
       this.pageCount = Math.ceil(count / this.page.size);
@@ -67,14 +68,5 @@ console.log(idGift);
     });
   }
 
-  onNotify() {
-    window.alert('Personne n\'a partcipé à ce cadeau');
-  }
-
-isadmin():boolean{
-    this.admine=this.userService.isAdmin();
-    return this.admine;
-    console.log("coucou "+this.admine);
-}
 
 }

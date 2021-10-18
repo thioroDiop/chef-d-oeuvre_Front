@@ -44,7 +44,7 @@
       <div class="form-group col-md-2">
         <select formControlName="table" (change)="onTableChange()">
           <option value="null">--Choisir la Table--</option>
-          <option *ngFor="let table of tableList | oderByPipe:'id' " [ngValue]="table"> {{table.id}} </option>
+          <option *ngFor="let table of tableList  " [ngValue]="table"> {{table.id}} </option>
         </select>
       </div>
     </div>
