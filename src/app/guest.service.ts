@@ -9,7 +9,7 @@ import {Guest} from "./guest";
   providedIn: 'root'
 })
 export class GuestService {
-baseUrl ='http://localhost:8080/api/';
+baseUrl ='https://localhost:8080/api/';
   constructor(private http: HttpClient) { }
 
   /**

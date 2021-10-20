@@ -15,7 +15,6 @@ export class UserService {
   admin:boolean=false;
  static readonly JWT_STORAGE_KEY = environment.apiUrl + 'JWT_QUOTES_API';
   private readonly AUTH_ENDPOINT = environment.apiUrl+ '/authentication';
-  private readonly USER_ENDPOINT = environment.apiUrl + '/admin/users';
 
   constructor(private http: HttpClient) {
   }

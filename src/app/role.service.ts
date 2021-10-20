@@ -9,7 +9,7 @@ import {Role} from "./role";
 })
 export class RoleService {
 
-  baseUrl ='http://localhost:8080/api/';
+  baseUrl ='https://localhost:8080/api/';
   constructor(private http: HttpClient) { }
 
 

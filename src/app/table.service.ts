@@ -8,7 +8,7 @@ import {Guest} from "./guest";
   providedIn: 'root'
 })
 export class TableService {
-  baseUrl = 'http://localhost:8080/api/';
+  baseUrl = 'https://localhost:8080/api/';
 
   constructor(private http: HttpClient) {
   }

@@ -8,7 +8,7 @@ import {RelationShip} from "./relationShip";
   providedIn: 'root'
 })
 export class RelationService {
-  baseUrl ='http://localhost:8080/api/';
+  baseUrl ='https://localhost:8080/api/';
   constructor(private http: HttpClient) { }
 
 

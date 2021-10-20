@@ -10,7 +10,7 @@ import {WeddingTable} from "./WeddingTable";
 })
 export class BridalService {
 
-  baseUrl ='http://localhost:8080/api/';
+  baseUrl ='https://localhost:8080/api/';
   constructor(private http: HttpClient) { }
 
   getBridalCouple(): Observable<BridalCouple[]> {
