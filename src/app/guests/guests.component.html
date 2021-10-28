@@ -3,7 +3,7 @@
 </p>
 <div id="newguest" [hidden]="changeText " class="container">
 
-  <form [formGroup]="filterGuestForm" (ngSubmit)="saveGuest()" class="w-50" >
+  <form [formGroup]="filterGuestForm" (ngSubmit)="saveGuest()" class="w-50">
     <div class="form-row">
       <div class="form-group col-md-3">
         <input type="hidden" id="guest_id" class="form-control" formControlName="id">
@@ -12,12 +12,12 @@
       </div>
       <div class="form-group col-md-3">
         <label for="lastName">LastName : </label>
-        <input id="lastName" type="text" required="true" formControlName="lastName" placeholder="Nom" >
+        <input id="lastName" type="text" required="true" formControlName="lastName" placeholder="Nom">
       </div>
 
 
       <div class="form-group col-md-3">
-        <label for="email">Address Email  : </label>
+        <label for="email">Address Email : </label>
         <input id="email" type="text" formControlName="email" placeholder="Email">
       </div>
       <div class="form-group col-md-3">
@@ -60,7 +60,7 @@
 <div [hidden]="guestOrganised" *ngIf="guestToPlace?.length==0">Il n'y a plus personne à placer</div>
 
 <div class="container container-table" style="width: 500px;text-align: center">
-  <h3 [hidden]="guestOrganised">Liste des Invités à organiser</h3>
+  <h3 [hidden]="guestOrganised"><b>Liste des Invités à organiser</b></h3>
   <table [hidden]="guestOrganised" class="table table-striped withEspace" *ngIf="guestToPlace?.length!=0">
     <thead>
     <tr>
@@ -88,7 +88,7 @@
 
 <div class="container">
   <h3><b>Liste des Invités</b></h3>
-  <table class="table w-50 table-hover" >
+  <table class="table w-50 table-hover">
     <thead class="thead-dark">
     <tr>
       <th>Nom</th>
@@ -114,8 +114,9 @@
     </tbody>
   </table>
 </div>
+
 <hr/>
-<h3></h3>
+
 <button type="button" class="btn btn-info mb-2" (click)="OpenTaskList()">Liste des Taches, Qui fait Quoi?</button>
 <div [hidden]="listeDesTaches" class="containerBadge  no-gutters" style="font-family:Gabriola; ">
 
@@ -123,6 +124,22 @@
     <h3><b>{{task.description}}</b></h3>
     <h4 *ngFor="let guest of task.guestList"><i>{{guest.firstName}} {{guest.lastName}}</i></h4>
   </div>
-
 </div>
+
 <hr/>
+
+<button type="button" class="btn btn-info mb-2" (click)="OpenAcommodationList()">Liste des Heberbements, Qui dort Où?</button>
+<div [hidden]="listeDesHebergements" class="hebergement" style="font-family:Gabriola; ">
+  <section>
+  <h3 [hidden]="listeDesHebergements"><b>Hotel</b></h3>
+  <div  *ngFor="let guest of guestListHotel" [hidden]="listeDesHebergements">
+    <h4><i>{{guest.firstName}} {{guest.lastName}}</i></h4>
+  </div>
+  </section>
+  <section>
+  <h3 [hidden]="listeDesHebergements"><b>Auberge</b></h3>
+  <div  *ngFor="let guest of guestListMaisons" [hidden]="listeDesHebergements">
+    <h4><i>{{guest.firstName}} {{guest.lastName}}</i></h4>
+  </div>
+  </section>
+</div>

@@ -21,6 +21,7 @@ export class GuestsComponent implements OnInit {
   changeText = true;
   guestOrganised = true;
   listeDesTaches = true;
+  listeDesHebergements= true;
   task: Task | undefined;
   table: WeddingTable | undefined;
   role: Role | undefined;
@@ -33,6 +34,8 @@ export class GuestsComponent implements OnInit {
   newGuest: Guest | undefined;
   // Je déclare mon attribut updateGuest pour la mise à jour d'un invité existant dans la BDD
   guestUpdated: Guest | undefined;
+   guestListHotel: any;
+   guestListMaisons: Guest[] | undefined;
 
 
   constructor(private guestService: GuestService, private taskService: TaskService, private formBuilder: FormBuilder,
@@ -55,6 +58,7 @@ export class GuestsComponent implements OnInit {
 
 
   //j'appele les listes dont j'ai besoin dans le formulaire
+
   ngOnInit(): void {
     this.guestService.getAllGuest().subscribe(result => {
       this.guestList = result;
@@ -72,6 +76,15 @@ export class GuestsComponent implements OnInit {
     this.roleService.getAllRole().subscribe(result => {
       this.roleList = result;
       console.log(this.roleList);
+    })
+//liste des invités par hebergement à l'hotel
+    this.guestService.getGuestsbyHotel().subscribe(result => {
+      this.guestListHotel = result;
+    })
+
+    //liste des invités par hebergement à l'Auberge
+    this.guestService.getGuestsbyHome().subscribe(result => {
+      this.guestListMaisons = result;
     })
 
   }
@@ -245,4 +258,10 @@ export class GuestsComponent implements OnInit {
   }
 
 
+  OpenAcommodationList() {
+    if (this.listeDesHebergements == true) {
+      this.listeDesHebergements = false;
+    } else
+      this.listeDesHebergements = true;
+  }
 }

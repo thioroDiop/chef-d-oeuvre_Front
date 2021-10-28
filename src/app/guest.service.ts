@@ -51,6 +51,14 @@ baseUrl ='https://localhost:8080/api/';
   return this.http.get<Guest[]>(this.baseUrl + 'guests/placed');
 }
 
+getGuestsbyHotel():Observable<Guest[]> {
+  return this.http.get<Guest[]>(this.baseUrl + 'guests/Accommodation/Hotel');
+}
+
+  getGuestsbyHome():Observable<Guest[]> {
+    return this.http.get<Guest[]>(this.baseUrl + 'guests/Accommodation/Auberge');
+  }
+
 
 
 }

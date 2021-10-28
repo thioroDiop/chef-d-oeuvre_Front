@@ -1,9 +1,12 @@
 .containerBadge{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+}
+@media (min-width: 600px) {
+  .containerBadge { flex-direction: row; }
 }
 
-@media (max-width: 700px){
+@media (max-width: 600px){
   .table thead {
     display: none;
   }
@@ -25,3 +28,14 @@
    padding: 0;
  }
 }
+
+.hebergement{
+  display: grid;
+  /*grid-template-columns: repeat(2, 1fr);*/
+  align-content: center;
+  text-align: center;
+}
+@media (min-width: 600px) {
+  .hebergement { grid-template-columns: repeat(2, 1fr); }
+}
+

@@ -24,7 +24,6 @@
 </form>
 
 
-
 <div class="container col-lg-12">
   <div class="row">
     <div class="  mt-2 p-2 col-2 toto no-gutters">
@@ -41,10 +40,10 @@
         <!--       Code pour popover-->
         <div class="popov">
           <button *ngIf="admine"
-            style="margin: 50px; padding: 10px"
-            type="button"
-            class="btn btn-primary"
-            (click)="openPopup(gift.id)">Show people to thank
+                  style="margin: 50px; padding: 10px"
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="openPopup(gift.id)">Show people to thank
           </button>
         </div>
         <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
@@ -53,9 +52,9 @@
               <div class="modal-header">
                 <h4 class="modal-title lead">Personnes à Remercier pour le cadeau</h4>
               </div>
-              <div class="modal-body" >
-<div *ngIf="guestListByGift?.length==0">Personne n'a parcicipé</div>
-                <table  class="table table-striped withEspace" *ngIf="guestListByGift?.length!=0" >
+              <div class="modal-body">
+                <div *ngIf="guestListByGift?.length==0">Personne n'a parcicipé</div>
+                <table class="table table-striped withEspace" *ngIf="guestListByGift?.length!=0">
                   <thead>
                   <tr>
                     <th>Name</th>
