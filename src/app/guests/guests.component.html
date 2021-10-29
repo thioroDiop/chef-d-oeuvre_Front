@@ -117,7 +117,7 @@
 
 <hr/>
 
-<button type="button" class="btn btn-info mb-2" (click)="OpenTaskList()">Liste des Taches, Qui fait Quoi?</button>
+<button type="button" class="btn btn-primary mb-2" (click)="OpenTaskList()">Liste des Taches, Qui fait Quoi?</button>
 <div [hidden]="listeDesTaches" class="containerBadge  no-gutters" style="font-family:Gabriola; ">
 
   <div class="col-md-8 " *ngFor="let task of taskList" [hidden]="listeDesTaches">
@@ -128,7 +128,7 @@
 
 <hr/>
 
-<button type="button" class="btn btn-info mb-2" (click)="OpenAcommodationList()">Liste des Heberbements, Qui dort Où?
+<button type="button" class="btn btn-primary mb-2" (click)="OpenAcommodationList()">Liste des Heberbements, Qui dort Où?
 </button>
 <div [hidden]="listeDesHebergements" class="hebergement" style="font-family:Gabriola; ">
   <section>
@@ -147,7 +147,7 @@
 
 <hr/>
 
-<button type="button" class="btn btn-info mb-2" (click)="OpenCoupleList()">Nombre d'invités par marié:</button>
+<button type="button" class="btn btn-primary mb-2" (click)="OpenCoupleList()">Nombre d'invités par marié:</button>
 <div class="container container-table" style="width: 500px;text-align: center">
   <table [hidden]="listeNbInvites" class="table table-striped">
     <thead>
