@@ -128,18 +128,41 @@
 
 <hr/>
 
-<button type="button" class="btn btn-info mb-2" (click)="OpenAcommodationList()">Liste des Heberbements, Qui dort Où?</button>
+<button type="button" class="btn btn-info mb-2" (click)="OpenAcommodationList()">Liste des Heberbements, Qui dort Où?
+</button>
 <div [hidden]="listeDesHebergements" class="hebergement" style="font-family:Gabriola; ">
   <section>
-  <h3 [hidden]="listeDesHebergements"><b>Hotel</b></h3>
-  <div  *ngFor="let guest of guestListHotel" [hidden]="listeDesHebergements">
-    <h4><i>{{guest.firstName}} {{guest.lastName}}</i></h4>
-  </div>
+    <h3 [hidden]="listeDesHebergements"><b>Hotel</b></h3>
+    <div *ngFor="let guest of guestListHotel" [hidden]="listeDesHebergements">
+      <h4><i>{{guest.firstName}} {{guest.lastName}}</i></h4>
+    </div>
   </section>
   <section>
-  <h3 [hidden]="listeDesHebergements"><b>Auberge</b></h3>
-  <div  *ngFor="let guest of guestListMaisons" [hidden]="listeDesHebergements">
-    <h4><i>{{guest.firstName}} {{guest.lastName}}</i></h4>
-  </div>
+    <h3 [hidden]="listeDesHebergements"><b>Auberge</b></h3>
+    <div *ngFor="let guest of guestListMaisons" [hidden]="listeDesHebergements">
+      <h4><i>{{guest.firstName}} {{guest.lastName}}</i></h4>
+    </div>
   </section>
+</div>
+
+<hr/>
+
+<button type="button" class="btn btn-info mb-2" (click)="OpenCoupleList()">Nombre d'invités par marié:</button>
+<div class="container container-table" style="width: 500px;text-align: center">
+  <table [hidden]="listeNbInvites" class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nom du Marié</th>
+      <th scope="col">Nombre d'invité</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let bride of NbGuestList; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td> {{ bride[1] }} </td>
+      <td>{{ bride[0]}}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>

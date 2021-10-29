@@ -16,7 +16,7 @@ export class BridalService {
   getBridalCouple(): Observable<BridalCouple[]> {
     return this.http.get<BridalCouple[]>(this.baseUrl + 'couple');
   }
-  getCoupleById(idBridal:number): Observable<BridalCouple> {
-    return this.http.get<BridalCouple>(this.baseUrl + 'couple/'+ idBridal);
+  getNbGuestByBride(): Observable<Object> {
+    return this.http.get<Object>(this.baseUrl + 'couple/nbGuest');
   }
 }

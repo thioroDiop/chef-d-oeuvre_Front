@@ -22,6 +22,7 @@ export class GuestsComponent implements OnInit {
   guestOrganised = true;
   listeDesTaches = true;
   listeDesHebergements= true;
+  listeNbInvites= true;
   task: Task | undefined;
   table: WeddingTable | undefined;
   role: Role | undefined;
@@ -257,11 +258,24 @@ export class GuestsComponent implements OnInit {
       this.listeDesTaches = true;
   }
 
-
+  //ouvre la section pour avoir la liste des invités par lieu d'hebergement
   OpenAcommodationList() {
     if (this.listeDesHebergements == true) {
       this.listeDesHebergements = false;
     } else
       this.listeDesHebergements = true;
+  }
+
+  //ouvre la section pour avoir les nombre d'invités par marié
+  NbGuestList: any;
+  OpenCoupleList() {
+    if (this.listeNbInvites == true) {
+      this.listeNbInvites = false;
+    } else
+      this.listeNbInvites = true;
+  //je souscrit à l'observable qui émet la liste du nombre d'invité par marié
+    this.bridalService.getNbGuestByBride().subscribe(result => {
+      this.NbGuestList = result;
+    });
   }
 }
