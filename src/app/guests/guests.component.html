@@ -7,6 +7,7 @@
     <div class="form-row">
       <div class="form-group col-md-3">
         <input type="hidden" id="guest_id" class="form-control" formControlName="id">
+        <input type="hidden"  class="form-control" formControlName="amountParticipation">
         <label for="firstName">FirstName : </label>
         <input id="firstName" type="text" required="true" formControlName="firstName" placeholder="Prenom">
       </div>
@@ -47,6 +48,19 @@
           <option *ngFor="let table of tableList  " [ngValue]="table"> {{table.id}} </option>
         </select>
       </div>
+<!--      sections caché pour recuperer les valeurs lors d'une modif-->
+      <select hidden="hidden" formControlName="gift" required="false" >
+        <option value="null">--Choisissez un cadeau!--</option>
+        <option  [ngValue]="gift"></option>
+      </select>
+      <select  hidden="hidden" formControlName="bridal" >
+        <option value="null">--Invité par--</option>
+        <option  [ngValue]="bridal"></option>
+      </select>
+      <select  hidden="hidden" formControlName="relationShip"  >
+        <option value="null">--Relation--</option>
+        <option   [ngValue]="relationShip"></option>
+      </select>
     </div>
     <div class="form-group">
       <button class="btn btn-success mb-2" title="Cliquez pour enregistrer" type="submit"> Sauvegarder</button>

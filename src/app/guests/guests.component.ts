@@ -10,6 +10,8 @@ import {Role} from "../role";
 import {Task} from "../task";
 import {RelationService} from "../relation.service";
 import {RoleService} from "../role.service";
+import {Gift} from "../gift";
+import {BridalCouple} from "../bridalCouple";
 
 @Component({
   selector: 'app-guests',
@@ -21,12 +23,15 @@ export class GuestsComponent implements OnInit {
   changeText = true;
   guestOrganised = true;
   listeDesTaches = true;
-  listeDesHebergements= true;
-  listeNbInvites= true;
+  listeDesHebergements = true;
+  listeNbInvites = true;
   task: Task | undefined;
   table: WeddingTable | undefined;
   role: Role | undefined;
   guestList: any;
+  gift: Gift | undefined;
+  bridal: BridalCouple | undefined;
+  relationShip:any;
   guestToPlace: Guest[] = [];
   taskList: Task[] = [];
   tableList: any;
@@ -35,8 +40,8 @@ export class GuestsComponent implements OnInit {
   newGuest: Guest | undefined;
   // Je déclare mon attribut updateGuest pour la mise à jour d'un invité existant dans la BDD
   guestUpdated: Guest | undefined;
-   guestListHotel: any;
-   guestListMaisons: Guest[] | undefined;
+  guestListHotel: any;
+  guestListMaisons: Guest[] | undefined;
 
 
   constructor(private guestService: GuestService, private taskService: TaskService, private formBuilder: FormBuilder,
@@ -55,6 +60,10 @@ export class GuestsComponent implements OnInit {
     email: '',
     table: null,
     id: 0,
+    gift: null,
+    bridal: null,
+    amountParticipation: '',
+    relationShip:null,
   });
 
 
@@ -78,15 +87,7 @@ export class GuestsComponent implements OnInit {
       this.roleList = result;
       console.log(this.roleList);
     })
-//liste des invités par hebergement à l'hotel
-    this.guestService.getGuestsbyHotel().subscribe(result => {
-      this.guestListHotel = result;
-    })
 
-    //liste des invités par hebergement à l'Auberge
-    this.guestService.getGuestsbyHome().subscribe(result => {
-      this.guestListMaisons = result;
-    })
 
   }
 
@@ -151,6 +152,10 @@ export class GuestsComponent implements OnInit {
       task: guest.task,
       table: guest.table,
       role: guest.role,
+      gift: guest.gift,
+      bridal: guest.bridal,
+      amountParticipation:  guest.amountParticipation,
+      relationShip:guest.relationShip,
     });
     this.guestUpdated = guest;
   }
@@ -176,7 +181,20 @@ export class GuestsComponent implements OnInit {
         //Je met a jour la liste de tables qui peut changer
         this.tableService.getTableNotFull().subscribe(result => {
           this.tableList = result;
-        })
+        });
+        //Je met a jour la liste du nombre d'invité par marié
+        this.bridalService.getNbGuestByBride().subscribe(result => {
+          this.NbGuestList = result;
+        });
+
+        //je met a jour la liste des invités par hebergement
+        this.guestService.getGuestsbyHotel().subscribe(result => {
+          this.guestListHotel = result;
+        });
+        this.guestService.getGuestsbyHome().subscribe(result => {
+          this.guestListMaisons = result;
+        });
+
       });
       console.log("Le guest a bien été mis à jour");
       // je vide mon objet guestUpdated
@@ -195,6 +213,7 @@ export class GuestsComponent implements OnInit {
       this.newGuest = this.filterGuestForm.value;
       // @ts-ignore
       this.newGuest?.table = this.filterGuestForm.get('table')?.value;
+
       //appelle de la méthode create du service
       this.guestService.createGuest(this.newGuest).subscribe(() => {
         //je met a jour la liste de guest
@@ -264,16 +283,28 @@ export class GuestsComponent implements OnInit {
       this.listeDesHebergements = false;
     } else
       this.listeDesHebergements = true;
+    //liste des invités par hebergement à l'hotel
+    this.guestService.getGuestsbyHotel().subscribe(result => {
+      this.guestListHotel = result;
+    })
+
+    //liste des invités par hebergement à l'Auberge
+    this.guestService.getGuestsbyHome().subscribe(result => {
+      this.guestListMaisons = result;
+    })
   }
 
   //ouvre la section pour avoir les nombre d'invités par marié
   NbGuestList: any;
+
+
+
   OpenCoupleList() {
     if (this.listeNbInvites == true) {
       this.listeNbInvites = false;
     } else
       this.listeNbInvites = true;
-  //je souscrit à l'observable qui émet la liste du nombre d'invité par marié
+    //je souscrit à l'observable qui émet la liste du nombre d'invité par marié
     this.bridalService.getNbGuestByBride().subscribe(result => {
       this.NbGuestList = result;
     });
