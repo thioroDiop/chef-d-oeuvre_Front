@@ -1,16 +1,17 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Guest} from "./guest";
-
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class GuestService {
-baseUrl ='https://localhost:8080/api/';
-  constructor(private http: HttpClient) { }
+  baseUrl = 'https://localhost:8080/api/';
+
+  constructor(private http: HttpClient) {
+  }
 
   /**
    * liste des invités
@@ -23,8 +24,8 @@ baseUrl ='https://localhost:8080/api/';
    * methode qui crée un nouveau invité
    * @param guest
    */
-  createGuest(guest: Guest |undefined): Observable<Guest>{
-    return this.http.post<Guest>(this.baseUrl+'guests/',guest)
+  createGuest(guest: Guest | undefined): Observable<Guest> {
+    return this.http.post<Guest>(this.baseUrl + 'guests/', guest)
   }
 
 
@@ -32,33 +33,32 @@ baseUrl ='https://localhost:8080/api/';
    * methode qui supprime un invité à partir de son id
    * @param guestId
    */
-  deleteGuest(guestId: number):Observable<any>{
-    return this.http.delete(this.baseUrl+'guests/'  + guestId)
+  deleteGuest(guestId: number): Observable<any> {
+    return this.http.delete(this.baseUrl + 'guests/' + guestId)
   }
 
   /**
    * methode qui modifié un invité
    * @param guest
    */
-  updateGuest( guest: Guest | undefined): Observable<Guest> {
-    return this.http.put<Guest>(this.baseUrl+'guests/guest/update' ,guest);
+  updateGuest(guest: Guest | undefined): Observable<Guest> {
+    return this.http.put<Guest>(this.baseUrl + 'guests/guest/update', guest);
   }
 
   /**
    *liste des invités a placé sur les tables et a attribué une tache/un role
    */
-  organiseGuest():Observable<Guest[]> {
-  return this.http.get<Guest[]>(this.baseUrl + 'guests/placed');
-}
-
-getGuestsbyHotel():Observable<Guest[]> {
-  return this.http.get<Guest[]>(this.baseUrl + 'guests/Accommodation/Hotel');
-}
-
-  getGuestsbyHome():Observable<Guest[]> {
-    return this.http.get<Guest[]>(this.baseUrl + 'guests/Accommodation/Auberge');
+  organiseGuest(): Observable<Guest[]> {
+    return this.http.get<Guest[]>(this.baseUrl + 'guests/placed');
   }
 
+  getGuestsbyHotel(): Observable<Guest[]> {
+    return this.http.get<Guest[]>(this.baseUrl + 'guests/accommodation/Hotel');
+  }
+
+  getGuestsbyHome(): Observable<Guest[]> {
+    return this.http.get<Guest[]>(this.baseUrl + 'guests/accommodation/Auberge');
+  }
 
 
 }

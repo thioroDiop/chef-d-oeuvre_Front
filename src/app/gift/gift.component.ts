@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GiftService} from "../gift.service";
 // @ts-ignore
 import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -25,7 +25,6 @@ export class GiftComponent implements OnInit {
     this.admine = this.userService.isAdmin();
 
   }
-
 
 //fonction appelée au click sur le bouton "show people"
   displayStyle = "none";

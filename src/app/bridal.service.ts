@@ -1,9 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Guest} from "./guest";
 import {BridalCouple} from "./bridalCouple";
-import {WeddingTable} from "./WeddingTable";
 
 @Injectable({
   providedIn: 'root'

@@ -12,9 +12,9 @@ import {tap} from "rxjs/operators";
 export class UserService {
 
   isLoggedin: boolean = false;
-  admin:boolean=false;
- static readonly JWT_STORAGE_KEY = environment.apiUrl + 'JWT_QUOTES_API';
-  private readonly AUTH_ENDPOINT = environment.apiUrl+ '/authentication';
+  admin: boolean = false;
+  static readonly JWT_STORAGE_KEY = environment.apiUrl + 'JWT_QUOTES_API';
+  private readonly AUTH_ENDPOINT = environment.apiUrl + '/authentication';
 
   constructor(private http: HttpClient) {
   }
@@ -34,7 +34,6 @@ export class UserService {
   }
 
 
-
 //renvoie le role qui est connecté
   getRoles(): string[] {
     const jwt = sessionStorage.getItem(UserService.JWT_STORAGE_KEY);
@@ -48,13 +47,12 @@ export class UserService {
   }
 
   //fonction pour verifier si on est connecté
-  isLoggedIn():boolean {
-let roles=this.getRoles();
+  isLoggedIn(): boolean {
+    let roles = this.getRoles();
     if (roles.length > 0) {
       this.isLoggedin = true;
       return this.isLoggedin;
-    }
-    else {
+    } else {
       return false;
     }
   }
