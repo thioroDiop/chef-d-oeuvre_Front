@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
 
   //recupere le username renseigné dans le formulaire
   get username() {
-   return this.loginForm.get('username');
- }
+    return this.loginForm.get('username');
+  }
 
   //recupere le password renseigné dans le formulaire
   get password() {

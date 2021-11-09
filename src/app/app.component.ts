@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthGuard} from "./auth.guard";
 import {UserService} from "./user.service";
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,13 +9,14 @@ import {UserService} from "./user.service";
 })
 export class AppComponent {
   title = 'weedingFront';
-  isAuthenticated: boolean= false;
-  constructor( private userService: UserService) {
+  isAuthenticated: boolean = false;
+
+  constructor(private userService: UserService) {
 
   }
 
   //fonction pour verifier si un utilisateur est connecté
-  isLoggedIn():boolean {
+  isLoggedIn(): boolean {
     this.isAuthenticated = this.userService.isLoggedIn();
     return this.isAuthenticated;
   }
