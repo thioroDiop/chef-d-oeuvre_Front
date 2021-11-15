@@ -19,7 +19,7 @@ export class TableService {
   }
 
 
-  getTableNotFull(): Observable<WeddingTable> {
-    return this.http.get<WeddingTable>(this.baseUrl + 'tables/listeTableNonRempli')
+  getTableNotFull(): Observable<WeddingTable[]> {
+    return this.http.get<WeddingTable[]>(this.baseUrl + 'tables/listeTableNonRempli')
   }
 }
