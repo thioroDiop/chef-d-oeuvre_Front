@@ -38,8 +38,8 @@ import {JwtInterceptor} from "./jwt.interceptor";
       {
         path: '',
         component: PageAcceuilComponent,
-        canActivate: [AuthGuard],
-        data: {roles: ["ROLE_GUEST", "ROLE_ADMIN"]}
+       // canActivate: [AuthGuard],
+       // data: {roles: ["ROLE_GUEST", "ROLE_ADMIN"]}
       },
       {//acces à ce router sans etre connecté
         path: 'login',
@@ -53,20 +53,20 @@ import {JwtInterceptor} from "./jwt.interceptor";
       },
       {
         path: 'adminguest/guest', component: GuestVueGuestsComponent,
-        canActivate: [AuthGuard], data: {roles: ["ROLE_ADMIN", "ROLE_GUEST"]}
+       // canActivate: [AuthGuard], data: {roles: ["ROLE_ADMIN", "ROLE_GUEST"]}
       },
 
       {
         path: 'tables',
         component: TablesComponent,
-        canActivate: [AuthGuard],
-        data: {roles: ["ROLE_GUEST", "ROLE_ADMIN"]}
+        // canActivate: [AuthGuard],
+        // data: {roles: ["ROLE_GUEST", "ROLE_ADMIN"]}
       },
       {
         path: 'gift',
         component: GiftComponent,
-        canActivate: [AuthGuard],
-        data: {roles: ["ROLE_GUEST", "ROLE_ADMIN"]}
+        // canActivate: [AuthGuard],
+        // data: {roles: ["ROLE_GUEST", "ROLE_ADMIN"]}
       },
       {
         path: '**',//toutes les routes inconnus, on les redirige vers la page d'acceuil

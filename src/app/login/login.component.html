@@ -2,7 +2,7 @@
 <form (ngSubmit)="onConnect()" [formGroup]="loginForm">
   <div class="form-field">
     <label for="username">Nom d'utilisateur</label>
-    <input type="text" id="username" autocomplete="username" formControlName="username">
+    <input type="text" id="username" autocomplete="off" formControlName="username">
     <div class="form-error" *ngIf="username?.invalid && (username?.dirty || username?.touched)">
       <div *ngIf="username?.errors?.required">
         Le username est requis

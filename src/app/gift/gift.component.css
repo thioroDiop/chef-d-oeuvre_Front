@@ -1,14 +1,14 @@
-.toto{
+.listecadeaux{
   display: grid;
   grid-auto-columns: 50px;
   grid-gap: 3px;
 }
 
 @media (min-width: 600px) {
-  .toto { grid-template-columns: repeat(2, 1fr); }
+  .listecadeaux { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 900px) {
-  .toto { grid-template-columns: repeat(3, 1fr); }
+  .listecadeaux { grid-template-columns: repeat(3, 1fr); }
 }
 
 .popov{

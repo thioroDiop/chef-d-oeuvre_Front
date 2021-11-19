@@ -7,11 +7,11 @@
 
     <input type="hidden" id="guest_id" class="form-control" formControlName="id">
     <label for="firstName">Prenom : </label>
-    <input id="firstName" type="text" required="true" formControlName="firstName">
+    <input id="firstName" type="text" required="true" autocomplete="off" formControlName="firstName">
     <label for="lastName">Nom : </label>
-    <input id="lastName" type="text" required="true" formControlName="lastName">
+    <input id="lastName" type="text" required="true" autocomplete="off" formControlName="lastName">
     <label for="email">Email : </label>
-    <input id="email" type="text" formControlName="email">
+    <input id="email" type="text" autocomplete="off" formControlName="email">
 
 
     <select formControlName="bridal" (change)="onCoupleChange()">
@@ -35,7 +35,7 @@
     </select>
 
     <label [hidden]="ajoutMontant" for="montantCadeau">Montant de : </label>
-    <input [hidden]="ajoutMontant" id="montantCadeau" type="text" formControlName="amountParticipation"
+    <input [hidden]="ajoutMontant" id="montantCadeau" type="text" autocomplete="off" formControlName="amountParticipation"
            placeholder="Votre participation?">
 
     <button title="Cliquez pour enregistrer" type="submit"> Enregisrer ma présence</button>

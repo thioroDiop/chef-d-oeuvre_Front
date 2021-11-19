@@ -31,7 +31,7 @@ export class GuestsComponent implements OnInit {
   guestList: any;
   gift: Gift | undefined;
   bridal: BridalCouple | undefined;
-  relationShip:any;
+  relationShip: any;
   guestToPlace: Guest[] = [];
   taskList: Task[] = [];
   tableList: any;
@@ -63,7 +63,7 @@ export class GuestsComponent implements OnInit {
     gift: null,
     bridal: null,
     amountParticipation: '',
-    relationShip:null,
+    relationShip: null,
   });
 
 
@@ -127,12 +127,11 @@ export class GuestsComponent implements OnInit {
    */
   onRoleChange() {
     this.roleService.getAllRole().subscribe(() => {
-      console.log('Detail de mon objet Role selectionné');
+
       //je recupere le detail le role selectionné
       this.role = this.filterGuestForm.get('role')?.value;
-      console.log(this.role);
-    });
 
+    });
   }
 
 
@@ -154,8 +153,8 @@ export class GuestsComponent implements OnInit {
       role: guest.role,
       gift: guest.gift,
       bridal: guest.bridal,
-      amountParticipation:  guest.amountParticipation,
-      relationShip:guest.relationShip,
+      amountParticipation: guest.amountParticipation,
+      relationShip: guest.relationShip,
     });
     this.guestUpdated = guest;
   }
@@ -296,7 +295,6 @@ export class GuestsComponent implements OnInit {
 
   //ouvre la section pour avoir les nombre d'invités par marié
   NbGuestList: any;
-
 
 
   OpenCoupleList() {
