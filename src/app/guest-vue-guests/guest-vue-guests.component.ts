@@ -6,7 +6,7 @@ import {Role} from "../role";
 import {Gift} from "../gift";
 import {Guest} from "../guest";
 import {GuestService} from "../guest.service";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {TableService} from "../table.service";
 import {BridalService} from "../bridal.service";
 import {RelationService} from "../relation.service";
@@ -49,7 +49,7 @@ export class GuestVueGuestsComponent implements OnInit {
     choixCadeau: '',
     firstName: '',
     lastName: '',
-    email: '',
+    email: ['', Validators.email],
     amountParticipation: '',
     bridal: null,
     gift: null,

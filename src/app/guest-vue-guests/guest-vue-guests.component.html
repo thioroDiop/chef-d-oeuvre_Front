@@ -37,8 +37,8 @@
     <label [hidden]="ajoutMontant" for="montantCadeau">Montant de : </label>
     <input [hidden]="ajoutMontant" id="montantCadeau" type="text" autocomplete="off" formControlName="amountParticipation"
            placeholder="Votre participation?">
-
-    <button title="Cliquez pour enregistrer" type="submit"> Enregisrer ma présence</button>
+<!--bouton ne fonction pas si un des champs du formulaire est invalide-->
+    <button title="Cliquez pour enregistrer" type="submit" [disabled]="filterGuestForm.invalid"> Enregisrer ma présence</button>
   </form>
 </div>
 <br>
